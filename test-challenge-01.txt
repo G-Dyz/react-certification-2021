@@ -1,0 +1,49 @@
+
+> youtube-challenge@0.1.0 test
+> react-scripts test "--coverage"
+
+-----------------------------|---------|----------|---------|---------|-------------------
+File                         | % Stmts | % Branch | % Funcs | % Lines | Uncovered Line #s 
+-----------------------------|---------|----------|---------|---------|-------------------
+All files                    |   98.92 |      100 |   96.43 |   98.89 |                   
+ src                         |     100 |      100 |     100 |     100 |                   
+  App.js                     |     100 |      100 |     100 |     100 |                   
+ src/components/Alert        |     100 |      100 |     100 |     100 |                   
+  Alert.component.jsx        |     100 |      100 |     100 |     100 |                   
+ src/components/Button       |     100 |      100 |     100 |     100 |                   
+  Button.component.jsx       |     100 |      100 |     100 |     100 |                   
+ src/components/Card         |     100 |      100 |     100 |     100 |                   
+  Card.component.jsx         |     100 |      100 |     100 |     100 |                   
+ src/components/Footer       |     100 |      100 |     100 |     100 |                   
+  Footer.component.jsx       |     100 |      100 |     100 |     100 |                   
+ src/components/Form         |     100 |      100 |     100 |     100 |                   
+  Form.component.jsx         |     100 |      100 |     100 |     100 |                   
+ src/components/Header       |     100 |      100 |     100 |     100 |                   
+  Header.component.jsx       |     100 |      100 |     100 |     100 |                   
+ src/components/SearchBar    |   91.67 |      100 |      75 |   91.67 |                   
+  SearchBar.component.jsx    |   91.67 |      100 |      75 |   91.67 | 26                
+ src/components/Sidebar      |     100 |      100 |     100 |     100 |                   
+  Sidebar.component.jsx      |     100 |      100 |     100 |     100 |                   
+ src/components/Submenu      |     100 |      100 |     100 |     100 |                   
+  SubMenu.component.jsx      |     100 |      100 |     100 |     100 |                   
+ src/components/ToggleSwitch |     100 |      100 |     100 |     100 |                   
+  ToggleSwitch.component.jsx |     100 |      100 |     100 |     100 |                   
+ src/mocks                   |     100 |      100 |     100 |     100 |                   
+  navegation-mock.js         |     100 |      100 |     100 |     100 |                   
+  youtube-videos-mock.js     |     100 |      100 |     100 |     100 |                   
+ src/pages/Favorites         |     100 |      100 |     100 |     100 |                   
+  Favorites.jsx              |     100 |      100 |     100 |     100 |                   
+ src/pages/Help              |     100 |      100 |     100 |     100 |                   
+  Help.jsx                   |     100 |      100 |     100 |     100 |                   
+ src/pages/Home              |     100 |      100 |     100 |     100 |                   
+  Home.jsx                   |     100 |      100 |     100 |     100 |                   
+ src/pages/Login             |     100 |      100 |     100 |     100 |                   
+  Login.jsx                  |     100 |      100 |     100 |     100 |                   
+ src/pages/NotFound          |     100 |      100 |     100 |     100 |                   
+  NotFound.jsx               |     100 |      100 |     100 |     100 |                   
+ src/pages/Secret            |     100 |      100 |     100 |     100 |                   
+  Secret.jsx                 |     100 |      100 |     100 |     100 |                   
+-----------------------------|---------|----------|---------|---------|-------------------
+
+
+[1B[J
