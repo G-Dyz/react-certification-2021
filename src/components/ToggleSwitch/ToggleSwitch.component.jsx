@@ -2,23 +2,6 @@ import React from 'react'
 import styled from 'styled-components'
 import PropTypes from 'prop-types'
 
-function Switch({ id, toggled, onChange }) {
-    return (
-        <SwitchContainer role="switch">
-            <SwitchInput
-                id={id}
-                type="checkbox"
-                checked={toggled}
-                onChange={onChange}
-                data-testid="checkbox"
-            />
-            <SwitchLabel htmlFor={id}>
-                <SwitchButton data-testid="switch" />
-            </SwitchLabel>
-        </SwitchContainer>
-    )
-}
-
 const SwitchInput = styled.input`
     height: 0;
     width: 0;
@@ -68,6 +51,22 @@ const SwitchContainer = styled.div`
     justify-content: center;
     align-items: center;
 `
+function Switch({ id, toggled, onChange }) {
+    return (
+        <SwitchContainer role="switch">
+            <SwitchInput
+                id={id}
+                type="checkbox"
+                checked={toggled}
+                onChange={onChange}
+                data-testid="checkbox"
+            />
+            <SwitchLabel htmlFor={id}>
+                <SwitchButton data-testid="switch" />
+            </SwitchLabel>
+        </SwitchContainer>
+    )
+}
 
 Switch.propTypes = {
     id: PropTypes.string,

@@ -2,45 +2,6 @@ import React, { useState } from 'react'
 import styled from 'styled-components'
 import * as AiIcons from 'react-icons/ai'
 
-function SearchBar() {
-    const [text, setText] = useState('')
-    const handleChange = (event) => {
-        setText(event.target.value)
-    }
-    const clearInput = () => {
-        setText('')
-    }
-
-    return (
-        <form>
-            <Container role="form">
-                <SearchButton className="right-icon" type="button">
-                    <AiIcons.AiOutlineSearch />
-                </SearchButton>
-                <Input
-                    type="text"
-                    value={text}
-                    onChange={handleChange}
-                    placeholder="Search"
-                    onSubmit={(e) => {
-                        e.preventDefault()
-                    }}
-                />
-                <ClearButton
-                    className="right-icon"
-                    onClick={clearInput}
-                    type="button"
-                    data-testid="clear-search"
-                    disabled={text.length === 0}
-                    style={text.length ? null : { color: 'white' }}
-                >
-                    <AiIcons.AiFillCloseCircle />
-                </ClearButton>
-            </Container>
-        </form>
-    )
-}
-
 const Input = styled.input`
     height: 32px;
     width: 100%;
@@ -96,5 +57,44 @@ const Container = styled.div`
         margin-right: 16px;
     }
 `
+
+function SearchBar() {
+    const [text, setText] = useState('')
+    const handleChange = (event) => {
+        setText(event.target.value)
+    }
+    const clearInput = () => {
+        setText('')
+    }
+
+    return (
+        <form>
+            <Container role="form">
+                <SearchButton className="right-icon" type="button">
+                    <AiIcons.AiOutlineSearch />
+                </SearchButton>
+                <Input
+                    type="text"
+                    value={text}
+                    onChange={handleChange}
+                    placeholder="Search"
+                    onSubmit={(e) => {
+                        e.preventDefault()
+                    }}
+                />
+                <ClearButton
+                    className="right-icon"
+                    onClick={clearInput}
+                    type="button"
+                    data-testid="clear-search"
+                    disabled={text.length === 0}
+                    style={text.length ? null : { color: 'white' }}
+                >
+                    <AiIcons.AiFillCloseCircle />
+                </ClearButton>
+            </Container>
+        </form>
+    )
+}
 
 export default SearchBar

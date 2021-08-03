@@ -3,6 +3,11 @@ import styled from 'styled-components'
 
 import Alert from '../../components/Alert'
 
+const Container = styled.div`
+    height: calc(100vh - 2 * 56px);
+    padding: 16px;
+`
+
 function Favorites() {
     return (
         <Container>
@@ -10,10 +15,5 @@ function Favorites() {
         </Container>
     )
 }
-
-const Container = styled.div`
-    height: calc(100vh - 2 * 56px);
-    padding: 16px;
-`
 
 export default Favorites

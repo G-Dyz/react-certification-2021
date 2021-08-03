@@ -4,31 +4,6 @@ import styled from 'styled-components'
 import PropTypes from 'prop-types'
 import Colors from '../../styles/Colors'
 
-function SubMenu({ item }) {
-    const [subnav, setSubnav] = useState(false)
-    const showSubNav = () => setSubnav(!subnav)
-
-    return (
-        <>
-            <SidebarLink to={item.path} onClick={item.subNav && showSubNav} role="contentinfo">
-                <div>
-                    {item.icon}
-                    <SidebarLabel role="note">{item.title}</SidebarLabel>
-                </div>
-            </SidebarLink>
-            {subnav &&
-                item.subNav.map((itemSubNav) => {
-                    return (
-                        <DropdownLink to={itemSubNav.path} key={itemSubNav.title}>
-                            {itemSubNav.icon}
-                            <SidebarLabel role="note">{itemSubNav.title}</SidebarLabel>
-                        </DropdownLink>
-                    )
-                })}
-        </>
-    )
-}
-
 const SidebarLink = styled(Link)`
     display: flex;
     color: #e1e9fc;
@@ -62,6 +37,31 @@ const DropdownLink = styled(Link)`
         cursor: pointer;
     }
 `
+
+function SubMenu({ item }) {
+    const [subnav, setSubnav] = useState(false)
+    const showSubNav = () => setSubnav(!subnav)
+
+    return (
+        <>
+            <SidebarLink to={item.path} onClick={item.subNav && showSubNav} role="contentinfo">
+                <div>
+                    {item.icon}
+                    <SidebarLabel role="note">{item.title}</SidebarLabel>
+                </div>
+            </SidebarLink>
+            {subnav &&
+                item.subNav.map((itemSubNav) => {
+                    return (
+                        <DropdownLink to={itemSubNav.path} key={itemSubNav.title}>
+                            {itemSubNav.icon}
+                            <SidebarLabel role="note">{itemSubNav.title}</SidebarLabel>
+                        </DropdownLink>
+                    )
+                })}
+        </>
+    )
+}
 
 SubMenu.propTypes = {
     item: PropTypes.shape({

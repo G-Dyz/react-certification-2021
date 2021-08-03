@@ -4,22 +4,6 @@ import PropTypes from 'prop-types'
 import { AiFillEye, AiFillHeart } from 'react-icons/ai'
 import Device from '../../styles/Device'
 
-function Card({ item }) {
-    return (
-        <Container role="gridcell">
-            <img src={item.thumbnails.medium.url} alt={item.title} />
-            <Icon>
-                <AiFillEye />
-                <AiFillHeart />
-            </Icon>
-            <Tittle role="contentinfo">{item.title}</Tittle>
-            <Text role="contentinfo">{item.channelTitle}</Text>
-            <Text role="contentinfo">{item.description}</Text>
-            <Text role="contentinfo">{item.publishTime.substring(0, 10)}</Text>
-        </Container>
-    )
-}
-
 const Container = styled.div`
     background: white;
     max-width: 250px;
@@ -92,6 +76,21 @@ const Icon = styled.div`
     color: white;
     position: absolute;
 `
+function Card({ item }) {
+    return (
+        <Container role="gridcell">
+            <img src={item.thumbnails.medium.url} alt={item.title} />
+            <Icon>
+                <AiFillEye />
+                <AiFillHeart />
+            </Icon>
+            <Tittle role="contentinfo">{item.title}</Tittle>
+            <Text role="contentinfo">{item.channelTitle}</Text>
+            <Text role="contentinfo">{item.description}</Text>
+            <Text role="contentinfo">{item.publishTime.substring(0, 10)}</Text>
+        </Container>
+    )
+}
 
 Card.propTypes = {
     item: PropTypes.shape({

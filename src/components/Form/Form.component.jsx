@@ -3,22 +3,6 @@ import styled from 'styled-components'
 import * as AiIcons from 'react-icons/ai'
 import Colors from '../../styles/Colors'
 
-const Login = () => (
-    <Container role="form">
-        <Icon>
-            <AiIcons.AiFillYoutube />
-            <p>Youtube</p>
-        </Icon>
-        <h1 role="contentinfo">Sign in</h1>
-        <h2 role="contentinfo">to continue to YouTube</h2>
-        <form>
-            <Input type="text" placeholder="email" role="textbox" />
-            <Input type="password" placeholder="password" role="textbox" />
-            <button type="button">Login</button>
-        </form>
-    </Container>
-)
-
 const Container = styled.div`
     display: flex;
     align-items: center;
@@ -79,5 +63,21 @@ const Icon = styled.div`
         margin-left: 1px;
     }
 `
+
+const Login = () => (
+    <Container role="form">
+        <Icon>
+            <AiIcons.AiFillYoutube />
+            <p>Youtube</p>
+        </Icon>
+        <h1 role="contentinfo">Sign in</h1>
+        <h2 role="contentinfo">to continue to YouTube</h2>
+        <form>
+            <Input type="text" placeholder="email" role="textbox" />
+            <Input type="password" placeholder="password" role="textbox" />
+            <button type="button">Login</button>
+        </form>
+    </Container>
+)
 
 export default Login
