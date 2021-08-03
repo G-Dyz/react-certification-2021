@@ -47,7 +47,7 @@ const Sidebar = () => {
 
     return (
         <>
-            <Header func={showSidebar} />
+            <Header onHamburgerMenuClick={showSidebar} />
             <SidebarNav sidebar={sidebar} role="navigation" data-testid="sidebar">
                 <SidebarWrap>
                     <HeaderContainer>

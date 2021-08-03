@@ -47,7 +47,7 @@ const Group = styled.div`
 `
 function Header(props) {
     const [isToggled, setIsToggled] = useState(false)
-    const pressHandler = () => props.func()
+    const pressHandler = () => props.onHamburgerMenuClick()
 
     return (
         <Container role="navigation">
@@ -76,11 +76,11 @@ function Header(props) {
 }
 
 Header.propTypes = {
-    func: PropTypes.func,
+    onHamburgerMenuClick: PropTypes.func,
 }
 
 Header.defaultProps = {
-    func: null,
+    onHamburgerMenuClick: null,
 }
 
 export default Header
