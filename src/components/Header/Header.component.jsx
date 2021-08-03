@@ -45,9 +45,9 @@ const Group = styled.div`
     align-items: center;
     gap: 16px;
 `
-function Header(props) {
+function Header({ onHamburgerMenuClick }) {
     const [isToggled, setIsToggled] = useState(false)
-    const pressHandler = () => props.onHamburgerMenuClick()
+    const pressHandler = () => onHamburgerMenuClick()
 
     return (
         <Container role="navigation">
