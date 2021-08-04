@@ -7,6 +7,49 @@ import Card from '../../components/Card'
 import Frame from '../../components/Frame'
 import Device from '../../styles/Device'
 
+const VideoLink = styled(Link)`
+    text-decoration: none;
+
+    &:hover {
+        cursor: pointer;
+    }
+`
+
+const Container = styled.div`
+    background: white;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    padding-top: 24px;
+    padding-bottom: 24px;
+    padding-left: 24px;
+    padding-right: 24px;
+
+    @media ${Device.mobileS} {
+        flex-direction: column;
+    }
+    @media ${Device.tablet} {
+        flex-direction: row;
+    }
+    @media ${Device.laptop} {
+        flex-direction: row;
+    }
+`
+const RelatedContainer = styled.div`
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+
+    @media ${Device.mobileS} {
+        flex-wrap: wrap;
+    }
+    @media ${Device.tablet} {
+        flex-direction: column;
+    }
+    @media ${Device.laptop} {
+        flex-direction: column;
+    }
+`
 function Video({ history }) {
     const [idVideo, setIdVideo] = useState('')
     const [video, setVideo] = useState('')
@@ -72,50 +115,6 @@ function Video({ history }) {
         </Container>
     )
 }
-
-const VideoLink = styled(Link)`
-    text-decoration: none;
-
-    &:hover {
-        cursor: pointer;
-    }
-`
-
-const Container = styled.div`
-    background: white;
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    padding-top: 24px;
-    padding-bottom: 24px;
-    padding-left: 24px;
-    padding-right: 24px;
-
-    @media ${Device.mobileS} {
-        flex-direction: column;
-    }
-    @media ${Device.tablet} {
-        flex-direction: row;
-    }
-    @media ${Device.laptop} {
-        flex-direction: row;
-    }
-`
-const RelatedContainer = styled.div`
-    display: flex;
-    align-items: flex-start;
-    justify-content: center;
-
-    @media ${Device.mobileS} {
-        flex-wrap: wrap;
-    }
-    @media ${Device.tablet} {
-        flex-direction: column;
-    }
-    @media ${Device.laptop} {
-        flex-direction: column;
-    }
-`
 
 Video.propTypes = {
     history: PropTypes.shape({

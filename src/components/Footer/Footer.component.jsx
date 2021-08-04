@@ -4,25 +4,6 @@ import { Link } from 'react-router-dom'
 import { AiFillYoutube } from 'react-icons/ai'
 import { IoHelpCircleSharp } from 'react-icons/io5'
 
-function Footer() {
-    return (
-        <Container>
-            <GroupLink to="/">
-                <Icon role="figure">
-                    <AiFillYoutube />
-                </Icon>
-                <Text role="contentinfo">Youtube 2021</Text>
-            </GroupLink>
-            <GroupLink to="/help">
-                <Text role="contentinfo">Help</Text>
-                <Icon role="figure">
-                    <IoHelpCircleSharp />
-                </Icon>
-            </GroupLink>
-        </Container>
-    )
-}
-
 const Container = styled.div`
     background-color: #292929;
     height: 56px;
@@ -60,5 +41,24 @@ const GroupLink = styled(Link)`
     align-items: center;
     text-decoration: none;
 `
+
+function Footer() {
+    return (
+        <Container>
+            <GroupLink to="/">
+                <Icon role="figure">
+                    <AiFillYoutube />
+                </Icon>
+                <Text role="contentinfo">Youtube 2021</Text>
+            </GroupLink>
+            <GroupLink to="/help">
+                <Text role="contentinfo">Help</Text>
+                <Icon role="figure">
+                    <IoHelpCircleSharp />
+                </Icon>
+            </GroupLink>
+        </Container>
+    )
+}
 
 export default Footer

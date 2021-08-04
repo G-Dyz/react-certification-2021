@@ -6,60 +6,6 @@ import styled from 'styled-components'
 import * as AiIcons from 'react-icons/ai'
 import { TopicContext } from '../../context/TopicContext'
 
-function SearchBar() {
-    const [text, setText] = useState('')
-    const handleChange = (event) => {
-        setText(event.target.value)
-    }
-    const clearInput = () => {
-        setText('')
-    }
-    const [topicContext, topicDispatcher] = useContext(TopicContext)
-    const history = useHistory()
-
-    const search = () => {
-        topicDispatcher(text)
-        history.push('/')
-    }
-    const onKeyUp = (e) => {
-        if (e.charCode === 13) {
-            search()
-        }
-    }
-
-    return (
-        <Container role="form">
-            <SearchButton
-                className="right-icon"
-                type="button"
-                onClick={() => search()}
-                data-testid="search-button"
-            >
-                <AiIcons.AiOutlineSearch />
-            </SearchButton>
-            <Input
-                type="text"
-                value={text}
-                onChange={handleChange}
-                placeholder="Search"
-                onKeyPress={(e) => {
-                    onKeyUp(e)
-                }}
-            />
-            <ClearButton
-                className="right-icon"
-                onClick={clearInput}
-                type="button"
-                data-testid="clear-search"
-                disabled={text.length === 0}
-                style={text.length ? null : { color: 'white' }}
-            >
-                <AiIcons.AiFillCloseCircle />
-            </ClearButton>
-        </Container>
-    )
-}
-
 const Input = styled.input`
     height: 32px;
     width: 100%;
@@ -115,5 +61,59 @@ const Container = styled.div`
         margin-right: 16px;
     }
 `
+
+function SearchBar() {
+    const [text, setText] = useState('')
+    const handleChange = (event) => {
+        setText(event.target.value)
+    }
+    const clearInput = () => {
+        setText('')
+    }
+    const [topicContext, topicDispatcher] = useContext(TopicContext)
+    const history = useHistory()
+
+    const search = () => {
+        topicDispatcher(text)
+        history.push('/')
+    }
+    const onKeyUp = (e) => {
+        if (e.charCode === 13) {
+            search()
+        }
+    }
+
+    return (
+        <Container role="form">
+            <SearchButton
+                className="right-icon"
+                type="button"
+                onClick={() => search()}
+                data-testid="search-button"
+            >
+                <AiIcons.AiOutlineSearch />
+            </SearchButton>
+            <Input
+                type="text"
+                value={text}
+                onChange={handleChange}
+                placeholder="Search"
+                onKeyPress={(e) => {
+                    onKeyUp(e)
+                }}
+            />
+            <ClearButton
+                className="right-icon"
+                onClick={clearInput}
+                type="button"
+                data-testid="clear-search"
+                disabled={text.length === 0}
+                style={text.length ? null : { color: 'white' }}
+            >
+                <AiIcons.AiFillCloseCircle />
+            </ClearButton>
+        </Container>
+    )
+}
 
 export default SearchBar

@@ -9,6 +9,23 @@ import { TopicContext } from '../../context/TopicContext'
 
 import API from '../../services/youtube.service'
 
+const Container = styled.div`
+    background: white;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    padding-top: 24px;
+    padding-bottom: 24px;
+`
+const VideoLink = styled(Link)`
+    text-decoration: none;
+
+    &:hover {
+        cursor: pointer;
+    }
+`
+
 function Home() {
     const [videos, setVideos] = useState('') // mockData.items
     const [topicContext, topicDispatcher] = useContext(TopicContext)
@@ -41,22 +58,5 @@ function Home() {
         </Container>
     )
 }
-
-const Container = styled.div`
-    background: white;
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    align-items: center;
-    padding-top: 24px;
-    padding-bottom: 24px;
-`
-const VideoLink = styled(Link)`
-    text-decoration: none;
-
-    &:hover {
-        cursor: pointer;
-    }
-`
 
 export default Home

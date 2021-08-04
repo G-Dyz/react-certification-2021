@@ -4,6 +4,40 @@ import styled from 'styled-components'
 import PropTypes from 'prop-types'
 import Colors from '../../styles/Colors'
 
+const SidebarLink = styled(Link)`
+    display: flex;
+    color: #e1e9fc;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+    list-style: none;
+    height: 60px;
+    text-decoration: none;
+
+    &:hover {
+        background: ${Colors.LIGHTSECONDARYCOLOR};
+        border-left: ${`4px solid ${Colors.DARKSECONDARYCOLOR}`};
+        cursor: pointer;
+    }
+`
+const SidebarLabel = styled.span`
+    margin-left: 16px;
+`
+const DropdownLink = styled(Link)`
+    background: ${Colors.DARKSECONDARYCOLOR};
+    height: 60px;
+    padding-left: 3rem;
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    color: #f5f5f5;
+
+    &:hover {
+        background: ${Colors.LIGHTSECONDARYCOLOR};
+        cursor: pointer;
+    }
+`
+
 function SubMenu({ item }) {
     const [subnav, setSubnav] = useState(false)
     const showSubNav = () => setSubnav(!subnav)
@@ -28,42 +62,6 @@ function SubMenu({ item }) {
         </>
     )
 }
-
-const SidebarLink = styled(Link)`
-    display: flex;
-    color: #e1e9fc;
-    justify-content: space-between;
-    align-items: center;
-    padding: 20px;
-    list-style: none;
-    height: 60px;
-    text-decoration: none;
-    /* font-size: 18px; */
-
-    &:hover {
-        background: ${Colors.LIGHTSECONDARYCOLOR};
-        border-left: ${`4px solid ${Colors.DARKSECONDARYCOLOR}`};
-        cursor: pointer;
-    }
-`
-const SidebarLabel = styled.span`
-    margin-left: 16px;
-`
-const DropdownLink = styled(Link)`
-    background: ${Colors.DARKSECONDARYCOLOR};
-    height: 60px;
-    padding-left: 3rem;
-    display: flex;
-    align-items: center;
-    text-decoration: none;
-    color: #f5f5f5;
-    /* font-size: 18px; */
-
-    &:hover {
-        background: ${Colors.LIGHTSECONDARYCOLOR};
-        cursor: pointer;
-    }
-`
 
 SubMenu.propTypes = {
     item: PropTypes.shape({

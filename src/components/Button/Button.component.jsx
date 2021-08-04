@@ -1,19 +1,9 @@
 import React from 'react'
 import styled from 'styled-components'
 import * as IoIcons from 'react-icons/io5'
+import { Link } from 'react-router-dom'
 import PropTypes from 'prop-types'
 import Colors from '../../styles/Colors'
-
-function Button({ tittle }) {
-    return (
-        <Container>
-            <Icon role="figure">
-                <IoIcons.IoPersonCircle />
-            </Icon>
-            <Text role="contentinfo">{tittle}</Text>
-        </Container>
-    )
-}
 
 const Container = styled.button`
     padding: 5px 11px;
@@ -42,6 +32,18 @@ const Icon = styled.div`
     align-items: center;
     color: ${Colors.WHITE};
 `
+function Button({ tittle }) {
+    return (
+        <Link to="/login">
+            <Container>
+                <Icon role="figure">
+                    <IoIcons.IoPersonCircle />
+                </Icon>
+                <Text role="contentinfo">{tittle}</Text>
+            </Container>
+        </Link>
+    )
+}
 
 Button.propTypes = {
     tittle: PropTypes.string,
