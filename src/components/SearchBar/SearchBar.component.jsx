@@ -1,6 +1,10 @@
-import React, { useState } from 'react'
+/* eslint no-unused-vars: "off" */
+
+import React, { useState, useContext } from 'react'
+import { useHistory } from 'react-router-dom'
 import styled from 'styled-components'
 import * as AiIcons from 'react-icons/ai'
+import { TopicContext } from '../../context/TopicContext'
 
 const Input = styled.input`
     height: 32px;
@@ -66,34 +70,49 @@ function SearchBar() {
     const clearInput = () => {
         setText('')
     }
+    const [topicContext, topicDispatcher] = useContext(TopicContext)
+    const history = useHistory()
+
+    const search = () => {
+        topicDispatcher(text)
+        history.push('/')
+    }
+    const onKeyUp = (e) => {
+        if (e.charCode === 13) {
+            search()
+        }
+    }
 
     return (
-        <form>
-            <Container role="form">
-                <SearchButton className="right-icon" type="button">
-                    <AiIcons.AiOutlineSearch />
-                </SearchButton>
-                <Input
-                    type="text"
-                    value={text}
-                    onChange={handleChange}
-                    placeholder="Search"
-                    onSubmit={(e) => {
-                        e.preventDefault()
-                    }}
-                />
-                <ClearButton
-                    className="right-icon"
-                    onClick={clearInput}
-                    type="button"
-                    data-testid="clear-search"
-                    disabled={text.length === 0}
-                    style={text.length ? null : { color: 'white' }}
-                >
-                    <AiIcons.AiFillCloseCircle />
-                </ClearButton>
-            </Container>
-        </form>
+        <Container role="form">
+            <SearchButton
+                className="right-icon"
+                type="button"
+                onClick={() => search()}
+                data-testid="search-button"
+            >
+                <AiIcons.AiOutlineSearch />
+            </SearchButton>
+            <Input
+                type="text"
+                value={text}
+                onChange={handleChange}
+                placeholder="Search"
+                onKeyPress={(e) => {
+                    onKeyUp(e)
+                }}
+            />
+            <ClearButton
+                className="right-icon"
+                onClick={clearInput}
+                type="button"
+                data-testid="clear-search"
+                disabled={text.length === 0}
+                style={text.length ? null : { color: 'white' }}
+            >
+                <AiIcons.AiFillCloseCircle />
+            </ClearButton>
+        </Container>
     )
 }
 

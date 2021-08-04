@@ -1,49 +1,77 @@
 
 > youtube-challenge@0.1.0 test
-> react-scripts test "--coverage"
+> react-scripts test "--coverage" "--watchAll=false"
 
 -----------------------------|---------|----------|---------|---------|-------------------
 File                         | % Stmts | % Branch | % Funcs | % Lines | Uncovered Line #s 
 -----------------------------|---------|----------|---------|---------|-------------------
-All files                    |   98.92 |      100 |   96.43 |   98.89 |                   
- src                         |     100 |      100 |     100 |     100 |                   
+All files                    |   96.13 |    64.52 |   95.12 |   96.05 |                   
+ src                         |      50 |      100 |     100 |      50 |                   
   App.js                     |     100 |      100 |     100 |     100 |                   
+  index.js                   |       0 |      100 |     100 |       0 | 6                 
  src/components/Alert        |     100 |      100 |     100 |     100 |                   
   Alert.component.jsx        |     100 |      100 |     100 |     100 |                   
+  index.js                   |       0 |        0 |       0 |       0 |                   
  src/components/Button       |     100 |      100 |     100 |     100 |                   
   Button.component.jsx       |     100 |      100 |     100 |     100 |                   
+  index.js                   |       0 |        0 |       0 |       0 |                   
  src/components/Card         |     100 |      100 |     100 |     100 |                   
   Card.component.jsx         |     100 |      100 |     100 |     100 |                   
+  index.js                   |       0 |        0 |       0 |       0 |                   
  src/components/Footer       |     100 |      100 |     100 |     100 |                   
   Footer.component.jsx       |     100 |      100 |     100 |     100 |                   
+  index.js                   |       0 |        0 |       0 |       0 |                   
  src/components/Form         |     100 |      100 |     100 |     100 |                   
   Form.component.jsx         |     100 |      100 |     100 |     100 |                   
+  index.js                   |       0 |        0 |       0 |       0 |                   
+ src/components/Frame        |     100 |       80 |     100 |     100 |                   
+  Frame.component.jsx        |     100 |       80 |     100 |     100 | 11                
+  index.js                   |       0 |        0 |       0 |       0 |                   
  src/components/Header       |     100 |      100 |     100 |     100 |                   
   Header.component.jsx       |     100 |      100 |     100 |     100 |                   
- src/components/SearchBar    |   91.67 |      100 |      75 |   91.67 |                   
-  SearchBar.component.jsx    |   91.67 |      100 |      75 |   91.67 | 26                
+  index.js                   |       0 |        0 |       0 |       0 |                   
+ src/components/SearchBar    |     100 |       75 |     100 |     100 |                   
+  SearchBar.component.jsx    |     100 |       75 |     100 |     100 | 25                
+  index.js                   |       0 |        0 |       0 |       0 |                   
  src/components/Sidebar      |     100 |      100 |     100 |     100 |                   
   Sidebar.component.jsx      |     100 |      100 |     100 |     100 |                   
+  SidebarData.js             |     100 |      100 |     100 |     100 |                   
+  index.js                   |       0 |        0 |       0 |       0 |                   
  src/components/Submenu      |     100 |      100 |     100 |     100 |                   
   SubMenu.component.jsx      |     100 |      100 |     100 |     100 |                   
+  index.js                   |       0 |        0 |       0 |       0 |                   
  src/components/ToggleSwitch |     100 |      100 |     100 |     100 |                   
   ToggleSwitch.component.jsx |     100 |      100 |     100 |     100 |                   
+  index.js                   |       0 |        0 |       0 |       0 |                   
+ src/context                 |     100 |      100 |     100 |     100 |                   
+  TopicContext.js            |     100 |      100 |     100 |     100 |                   
  src/mocks                   |     100 |      100 |     100 |     100 |                   
   navegation-mock.js         |     100 |      100 |     100 |     100 |                   
   youtube-videos-mock.js     |     100 |      100 |     100 |     100 |                   
  src/pages/Favorites         |     100 |      100 |     100 |     100 |                   
   Favorites.jsx              |     100 |      100 |     100 |     100 |                   
+  index.js                   |       0 |        0 |       0 |       0 |                   
  src/pages/Help              |     100 |      100 |     100 |     100 |                   
   Help.jsx                   |     100 |      100 |     100 |     100 |                   
- src/pages/Home              |     100 |      100 |     100 |     100 |                   
-  Home.jsx                   |     100 |      100 |     100 |     100 |                   
+  index.js                   |       0 |        0 |       0 |       0 |                   
+ src/pages/Home              |   81.82 |    33.33 |      75 |   81.82 |                   
+  Home.jsx                   |   81.82 |    33.33 |      75 |   81.82 | 21,33             
+  index.js                   |       0 |        0 |       0 |       0 |                   
  src/pages/Login             |     100 |      100 |     100 |     100 |                   
   Login.jsx                  |     100 |      100 |     100 |     100 |                   
+  index.js                   |       0 |        0 |       0 |       0 |                   
  src/pages/NotFound          |     100 |      100 |     100 |     100 |                   
   NotFound.jsx               |     100 |      100 |     100 |     100 |                   
+  index.js                   |       0 |        0 |       0 |       0 |                   
  src/pages/Secret            |     100 |      100 |     100 |     100 |                   
   Secret.jsx                 |     100 |      100 |     100 |     100 |                   
+  index.js                   |       0 |        0 |       0 |       0 |                   
+ src/pages/Video             |   86.96 |    46.15 |   83.33 |   86.96 |                   
+  Video.jsx                  |   86.96 |    46.15 |   83.33 |   86.96 | 24,36,58          
+  index.js                   |       0 |        0 |       0 |       0 |                   
+ src/services                |     100 |      100 |     100 |     100 |                   
+  youtube.service.js         |     100 |      100 |     100 |     100 |                   
+ src/styles                  |     100 |      100 |     100 |     100 |                   
+  Colors.js                  |       0 |        0 |       0 |       0 |                   
+  Device.js                  |     100 |      100 |     100 |     100 |                   
 -----------------------------|---------|----------|---------|---------|-------------------
-
-
-[1B[J

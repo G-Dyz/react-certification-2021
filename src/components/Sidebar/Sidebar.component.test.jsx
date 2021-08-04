@@ -2,13 +2,16 @@ import { render, screen, fireEvent } from '@testing-library/react'
 import React from 'react'
 import { BrowserRouter } from 'react-router-dom'
 import Sidebar from './Sidebar.component'
+import { TopicProvider } from '../../context/TopicContext'
 
 describe('Sidebar', () => {
     beforeEach(() => {
         return render(
-            <BrowserRouter>
-                <Sidebar />
-            </BrowserRouter>
+            <TopicProvider>
+                <BrowserRouter>
+                    <Sidebar />
+                </BrowserRouter>
+            </TopicProvider>
         )
     })
     it('has all of its components', () => {
