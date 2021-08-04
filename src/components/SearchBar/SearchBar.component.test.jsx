@@ -1,18 +1,10 @@
 import { render, screen, fireEvent } from '@testing-library/react'
 import React from 'react'
-import { BrowserRouter } from 'react-router-dom'
 import SearchBar from './SearchBar.component'
-import { TopicProvider } from '../../context/TopicContext'
 
 describe('SearchBar', () => {
     beforeEach(() => {
-        return render(
-            <TopicProvider>
-                <BrowserRouter>
-                    <SearchBar />
-                </BrowserRouter>
-            </TopicProvider>
-        )
+        return render(<SearchBar />)
     })
     it('should have all of its components', () => {
         expect(screen.getByRole('form')).toBeInTheDocument()
@@ -37,15 +29,5 @@ describe('SearchBar', () => {
         expect(searchInput.value).toBe('test')
         fireEvent.click(screen.getByTestId('clear-search'))
         expect(searchInput.value).toBe('')
-    })
-    it('search button should call the context value', () => {
-        const searchInput = screen.getByPlaceholderText('Search')
-        fireEvent.change(searchInput, { target: { value: 'test' } })
-        fireEvent.click(screen.getByTestId('search-button'))
-    })
-    it('search button should call the context value using keyup', () => {
-        const searchInput = screen.getByPlaceholderText('Search')
-        fireEvent.change(searchInput, { target: { value: 'test' } })
-        fireEvent.keyPress(searchInput, { key: 'enter', keyCode: 13 })
     })
 })
