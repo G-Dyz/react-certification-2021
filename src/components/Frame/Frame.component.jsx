@@ -5,45 +5,6 @@ import * as AiIcons from 'react-icons/ai'
 import PropTypes from 'prop-types'
 import Device from '../../styles/Device'
 
-function Frame({ video }) {
-    return (
-        <Container>
-            {video && video.snippet && video.snippet.localized ? (
-                <>
-                    <FrameVideo
-                        title={video.snippet.localized.title}
-                        src={`https://www.youtube.com/embed/${video.id}`}
-                        alt={video.snippet.localized.title}
-                        role="figure"
-                    />
-                    <CardDetail>
-                        <h1>{video.snippet.localized.title}</h1>
-                        <Channel>
-                            <h2 role="contentinfo">{video.snippet.channelTitle}</h2>
-                            <Icon>
-                                <AiIcons.AiFillCheckCircle />
-                            </Icon>
-                        </Channel>
-                        <p role="contentinfo">{video.snippet.localized.description}</p>
-                        <Info>
-                            <div>
-                                <p role="contentinfo">
-                                    {video.snippet.publishedAt.substring(0, 10)}
-                                </p>
-                            </div>
-                            <Icon>
-                                <IconName.BiListPlus />
-                                <IconText>Guardar</IconText>
-                            </Icon>
-                        </Info>
-                    </CardDetail>
-                    <Separator />
-                </>
-            ) : null}
-        </Container>
-    )
-}
-
 const Container = styled.div`
     display: flex;
     align-items: flex-start;
@@ -117,6 +78,45 @@ const Separator = styled.hr`
     margin-top: 24px;
     margin-bottom: 24px;
 `
+
+function Frame({ video }) {
+    return (
+        <Container>
+            {video && video.snippet && video.snippet.localized ? (
+                <>
+                    <FrameVideo
+                        title={video.snippet.localized.title}
+                        src={`https://www.youtube.com/embed/${video.id}`}
+                        alt={video.snippet.localized.title}
+                        role="figure"
+                    />
+                    <CardDetail>
+                        <h1>{video.snippet.localized.title}</h1>
+                        <Channel>
+                            <h2 role="contentinfo">{video.snippet.channelTitle}</h2>
+                            <Icon>
+                                <AiIcons.AiFillCheckCircle />
+                            </Icon>
+                        </Channel>
+                        <p role="contentinfo">{video.snippet.localized.description}</p>
+                        <Info>
+                            <div>
+                                <p role="contentinfo">
+                                    {video.snippet.publishedAt.substring(0, 10)}
+                                </p>
+                            </div>
+                            <Icon>
+                                <IconName.BiListPlus />
+                                <IconText>Guardar</IconText>
+                            </Icon>
+                        </Info>
+                    </CardDetail>
+                    <Separator />
+                </>
+            ) : null}
+        </Container>
+    )
+}
 
 Frame.propTypes = {
     video: PropTypes.shape({
