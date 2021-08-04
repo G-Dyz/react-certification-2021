@@ -13,7 +13,7 @@ describe('Header', () => {
         return render(
             <TopicProvider>
                 <BrowserRouter>
-                    <Header func={showSidebar} />
+                    <Header onHamburgerMenuClick={showSidebar} />
                 </BrowserRouter>
             </TopicProvider>
         )
