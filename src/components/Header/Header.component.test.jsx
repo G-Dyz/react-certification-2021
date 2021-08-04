@@ -11,7 +11,7 @@ describe('Header', () => {
     beforeEach(() => {
         return render(
             <BrowserRouter>
-                <Header func={showSidebar} />
+                <Header onHamburgerMenuClick={showSidebar} />
             </BrowserRouter>
         )
     })
