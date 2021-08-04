@@ -1,6 +1,20 @@
 import React from 'react'
 import styled from 'styled-components'
 
+const Container = styled.div`
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: calc(100vh - 2 * 56px);
+
+    p {
+        color: #333;
+        text-align: center;
+        margin-top: 10px;
+    }
+`
+
 function NotFound() {
     return (
         <Container>
@@ -16,19 +30,5 @@ function NotFound() {
         </Container>
     )
 }
-
-const Container = styled.div`
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    height: calc(100vh - 2 * 56px);
-
-    p {
-        color: #333;
-        text-align: center;
-        margin-top: 10px;
-    }
-`
 
 export default NotFound

@@ -12,36 +12,6 @@ import ToggleSwitch from '../ToggleSwitch'
 import Colors from '../../styles/Colors'
 import Button from '../Button'
 
-function Header(props) {
-    const [isToggled, setIsToggled] = useState(false)
-    const pressHandler = () => props.func()
-
-    return (
-        <Container role="navigation">
-            <Group>
-                <NavIcon to="#" data-testid="hamburgerMenu" onClick={pressHandler}>
-                    <FaIcons.FaBars />
-                </NavIcon>
-                <NavIcon to="/">
-                    <AiIcons.AiFillYoutube />
-                    <p>Youtube</p>
-                </NavIcon>
-            </Group>
-            <Group>
-                <SearchBar />
-            </Group>
-            <Group>
-                <ToggleSwitch
-                    id="theme-toggle"
-                    toggled={isToggled}
-                    onChange={(e) => setIsToggled(e.target.checked)}
-                />
-                <Button tittle="SIGN IN" />
-            </Group>
-        </Container>
-    )
-}
-
 const NavIcon = styled(Link)`
     font-size: 1.5rem;
     height: 56px;
@@ -75,13 +45,42 @@ const Group = styled.div`
     align-items: center;
     gap: 16px;
 `
+function Header({ onHamburgerMenuClick }) {
+    const [isToggled, setIsToggled] = useState(false)
+    const pressHandler = () => onHamburgerMenuClick()
+
+    return (
+        <Container role="navigation">
+            <Group>
+                <NavIcon to="#" data-testid="hamburgerMenu" onClick={pressHandler}>
+                    <FaIcons.FaBars />
+                </NavIcon>
+                <NavIcon to="/">
+                    <AiIcons.AiFillYoutube />
+                    <p>Youtube</p>
+                </NavIcon>
+            </Group>
+            <Group>
+                <SearchBar />
+            </Group>
+            <Group>
+                <ToggleSwitch
+                    id="theme-toggle"
+                    toggled={isToggled}
+                    onChange={(e) => setIsToggled(e.target.checked)}
+                />
+                <Button tittle="SIGN IN" />
+            </Group>
+        </Container>
+    )
+}
 
 Header.propTypes = {
-    func: PropTypes.func,
+    onHamburgerMenuClick: PropTypes.func,
 }
 
 Header.defaultProps = {
-    func: null,
+    onHamburgerMenuClick: null,
 }
 
 export default Header

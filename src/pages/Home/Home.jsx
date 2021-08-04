@@ -3,16 +3,6 @@ import styled from 'styled-components'
 import mockData from '../../mocks/youtube-videos-mock'
 import Card from '../../components/Card'
 
-function Home() {
-    return (
-        <Container>
-            {mockData.items.map((item) => (
-                <Card item={item.snippet} key={item.snippet.publishedAt} />
-            ))}
-        </Container>
-    )
-}
-
 const Container = styled.div`
     background: white;
     display: flex;
@@ -22,5 +12,15 @@ const Container = styled.div`
     padding-top: 24px;
     padding-bottom: 24px;
 `
+
+function Home() {
+    return (
+        <Container>
+            {mockData.items.map((item) => (
+                <Card item={item.snippet} key={item.snippet.publishedAt} />
+            ))}
+        </Container>
+    )
+}
 
 export default Home
