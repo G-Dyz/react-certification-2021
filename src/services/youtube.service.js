@@ -1,14 +1,12 @@
 import axios from 'axios'
 
-const KEY = 'AIzaSyBfL9EVBT3LIKHlBcKS8v8-4da0suhY4iE'
-
 export default axios.create({
-    baseURL: 'https://www.googleapis.com/youtube/v3',
+    baseURL: process.env.REACT_APP_API,
     params: {
         part: 'snippet',
         type: 'video',
         maxResults: 24,
-        key: KEY,
+        key: process.env.REACT_APP_KEY,
     },
     headers: {},
 })
