@@ -91,26 +91,24 @@ function Video({ history }) {
 
     return (
         <Container>
-            {relatedVideos && relatedVideos.length && <Frame video={video} />}
+            {relatedVideos?.length ? <Frame video={video} /> : null}
 
             <RelatedContainer>
-                {relatedVideos &&
-                    relatedVideos.length &&
-                    relatedVideos.map(
-                        (item) =>
-                            item.snippet &&
-                            item.snippet.publishedAt && (
-                                <VideoLink
-                                    to={{
-                                        pathname: `/video`,
-                                        search: `?videoUrl=${item.id.videoId}`,
-                                    }}
-                                    key={item.snippet.publishedAt}
-                                >
-                                    <Card item={item.snippet} />
-                                </VideoLink>
-                            )
-                    )}
+                {relatedVideos?.length
+                    ? relatedVideos.map((item) =>
+                          item.snippet?.publishedAt ? (
+                              <VideoLink
+                                  to={{
+                                      pathname: `/video`,
+                                      search: `?videoUrl=${item.id.videoId}`,
+                                  }}
+                                  key={item.snippet.publishedAt}
+                              >
+                                  <Card item={item.snippet} />
+                              </VideoLink>
+                          ) : null
+                      )
+                    : null}
             </RelatedContainer>
         </Container>
     )

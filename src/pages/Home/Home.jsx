@@ -27,7 +27,7 @@ const VideoLink = styled(Link)`
 `
 
 function Home() {
-    const [videos, setVideos] = useState('') // mockData.items
+    const [videos, setVideos] = useState('')
     const [topicContext, topicDispatcher] = useContext(TopicContext)
     const onSearch = async (keyword) => {
         const response = await API.get('/search', {
@@ -44,8 +44,7 @@ function Home() {
 
     return (
         <Container>
-            {videos &&
-                videos.length &&
+            {videos?.length &&
                 videos.map((item) => (
                     <VideoLink
                         to={{ pathname: `/video`, search: `?videoUrl=${item.id.videoId}` }}

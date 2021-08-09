@@ -82,7 +82,7 @@ const Separator = styled.hr`
 function Frame({ video }) {
     return (
         <Container>
-            {video && video.snippet && video.snippet.localized ? (
+            {video?.snippet?.localized ? (
                 <>
                     <FrameVideo
                         title={video.snippet.localized.title}
