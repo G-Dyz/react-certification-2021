@@ -21,12 +21,14 @@
         "react/prefer-stateless-function":      [1],
         "react/static-property-placement":      [1, "property assignment"],
         "react-hooks/rules-of-hooks":           "error",
-        "react-hooks/exhaustive-deps":          "warn"
+        "react-hooks/exhaustive-deps":          "warn",
+        "react/jsx-props-no-spreading": "off",
     },
     "parserOptions": {
         "ecmaFeatures": {
             "jsx": true
-        }
+        },
+        "ecmaVersion": 2021,
     },
     "globals": {
         "document": true,

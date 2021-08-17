@@ -2,6 +2,7 @@ import { render, screen, fireEvent } from '@testing-library/react'
 import React from 'react'
 import { BrowserRouter } from 'react-router-dom'
 import Header from './Header.component'
+import { TopicProvider } from '../../context/TopicContext'
 
 describe('Header', () => {
     let flagSidebar = false
@@ -10,9 +11,11 @@ describe('Header', () => {
     }
     beforeEach(() => {
         return render(
-            <BrowserRouter>
-                <Header onHamburgerMenuClick={showSidebar} />
-            </BrowserRouter>
+            <TopicProvider>
+                <BrowserRouter>
+                    <Header onHamburgerMenuClick={showSidebar} />
+                </BrowserRouter>
+            </TopicProvider>
         )
     })
     it('should have all of its components', () => {
