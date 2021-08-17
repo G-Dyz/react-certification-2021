@@ -1,11 +1,12 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import styled from 'styled-components'
 import PropTypes from 'prop-types'
 import { AiFillEye, AiFillHeart } from 'react-icons/ai'
 import Device from '../../styles/Device'
+import { ThemeContext } from '../../context/ThemeContext'
+import Colors from '../../styles/Colors'
 
 const Container = styled.div`
-    background: white;
     max-width: 250px;
     margin-bottom: 40px;
     margin-left: 8px;
@@ -59,6 +60,7 @@ const Tittle = styled.p`
     display: -webkit-box;
     -webkit-line-clamp: 2;
     -webkit-box-orient: vertical;
+    color: ${({ themecontext }) => (themecontext ? Colors.DARK_LETTER : Colors.LIGHT_LETTER)};
 `
 const Text = styled.p`
     overflow: hidden;
@@ -76,7 +78,12 @@ const Icon = styled.div`
     color: white;
     position: absolute;
 `
+
 function Card({ item }) {
+    const [themeContext, themeDispatcher] = useContext(ThemeContext)
+    const capitalizeFirstLetterSentence = (mySentence) => {
+        return mySentence.replace(/(^\w{1})|(\s+\w{1})/g, (letter) => letter.toUpperCase())
+    }
     return (
         <Container role="gridcell">
             <img src={item.thumbnails.medium.url} alt={item.title} />
@@ -84,8 +91,10 @@ function Card({ item }) {
                 <AiFillEye />
                 <AiFillHeart />
             </Icon>
-            <Tittle role="contentinfo">{item.title}</Tittle>
-            <Text role="contentinfo">{item.channelTitle}</Text>
+            <Tittle themecontext={themeContext} role="contentinfo">
+                {item.title}
+            </Tittle>
+            <Text role="contentinfo">{capitalizeFirstLetterSentence(item.channelTitle)}</Text>
             <Text role="contentinfo">{item.description}</Text>
             <Text role="contentinfo">{item.publishTime.substring(0, 10)}</Text>
         </Container>

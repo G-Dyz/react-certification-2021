@@ -3,6 +3,7 @@ import React from 'react'
 import { BrowserRouter } from 'react-router-dom'
 import Header from './Header.component'
 import { TopicProvider } from '../../context/TopicContext'
+import { ThemeProvider } from '../../context/ThemeContext'
 
 describe('Header', () => {
     let flagSidebar = false
@@ -11,11 +12,13 @@ describe('Header', () => {
     }
     beforeEach(() => {
         return render(
-            <TopicProvider>
-                <BrowserRouter>
-                    <Header onHamburgerMenuClick={showSidebar} />
-                </BrowserRouter>
-            </TopicProvider>
+            <ThemeProvider>
+                <TopicProvider>
+                    <BrowserRouter>
+                        <Header onHamburgerMenuClick={showSidebar} />
+                    </BrowserRouter>
+                </TopicProvider>
+            </ThemeProvider>
         )
     })
     it('should have all of its components', () => {

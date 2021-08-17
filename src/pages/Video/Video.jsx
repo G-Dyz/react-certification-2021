@@ -103,6 +103,7 @@ function Video({ history }) {
                                       search: `?videoUrl=${item.id.videoId}`,
                                   }}
                                   key={item.snippet.publishedAt}
+                                  role="figure"
                               >
                                   <Card item={item.snippet} />
                               </VideoLink>

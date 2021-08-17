@@ -3,14 +3,17 @@ import React from 'react'
 import { BrowserRouter } from 'react-router-dom'
 import SidebarData from '../../mocks/navegation-mock'
 import SubMenu from './SubMenu.component'
+import { ThemeProvider } from '../../context/ThemeContext'
 
 describe('SubMenu', () => {
     const itemMenu = SidebarData[0]
     beforeEach(() => {
         return render(
-            <BrowserRouter>
-                <SubMenu item={itemMenu} />
-            </BrowserRouter>
+            <ThemeProvider>
+                <BrowserRouter>
+                    <SubMenu item={itemMenu} />
+                </BrowserRouter>
+            </ThemeProvider>
         )
     })
     it('should have all of its components', () => {

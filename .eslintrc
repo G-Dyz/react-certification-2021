@@ -23,6 +23,7 @@
         "react-hooks/rules-of-hooks":           "error",
         "react-hooks/exhaustive-deps":          "warn",
         "react/jsx-props-no-spreading": "off",
+        "no-unused-vars": "warn"
     },
     "parserOptions": {
         "ecmaFeatures": {
@@ -37,7 +38,8 @@
         "expect":true,
         "it":true,
         "beforeEach":true,
-        "test":true
+        "test":true,
+        "window":true
     },
     "overrides": [
         {

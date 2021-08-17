@@ -5,7 +5,7 @@ import PropTypes from 'prop-types'
 import Colors from '../../styles/Colors'
 
 const Container = styled.div`
-    background: pink;
+    background: rgb(255, 192, 203, 0.75);
     display: flex;
     flex-direction: row;
     justify-content: left;
@@ -14,7 +14,7 @@ const Container = styled.div`
     gap: 12px;
     border-radius: 5px;
     font-size: 1.05rem;
-    color: ${Colors.SECONDARYCOLOR};
+    color: ${Colors.LIGHT_SECONDARYCOLOR};
 `
 const Icon = styled.div`
     font-size: 1.2rem;
