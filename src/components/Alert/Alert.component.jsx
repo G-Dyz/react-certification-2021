@@ -5,7 +5,7 @@ import PropTypes from 'prop-types'
 import Colors from '../../styles/Colors'
 
 const Container = styled.div`
-    background: rgb(255, 192, 203, 0.75);
+    background: ${Colors.LIGHT_WARNING};
     display: flex;
     flex-direction: row;
     justify-content: left;
