@@ -2,6 +2,9 @@ export default {
     WHITE: '#FFF',
     ERROR: '#C8161D',
     WARNING: '#FBC02D',
+    LIGHT_WARNING: 'rgb(255, 192, 203, 0.75)',
+    DARK_CARD: 'rgba(0, 0, 0, 0.75)',
+    LIGHT_CARD: 'rgba(0, 0, 0, 0.25)',
 
     //  Light Theme
 

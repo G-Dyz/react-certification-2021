@@ -41,13 +41,13 @@ const Container = styled.div`
         top: -50px;
         left: 5px;
         display: block;
-        background: rgba(0, 0, 0, 0.75);
+        background: ${Colors.DARK_CARD};
         border-radius: 5px;
         margin-right: 5px;
         padding: 2px;
     }
     &:hover img {
-        box-shadow: 0 8px 8px rgba(0, 0, 0, 0.25);
+        box-shadow: ${`0 8px 8px ${Colors.LIGHT_CARD}`};
     }
 `
 const Tittle = styled.p`
