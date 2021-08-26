@@ -1,20 +1,16 @@
 import React, { createContext, useReducer, useEffect } from 'react'
 import PropTypes from 'prop-types'
-import { saveUser, getUser, deleteUser } from '../storage/UserAsyncStorage'
 
+const USER_KEY = '@User:key'
 const initialState = []
 
 const AuthReducer = (state, payload) => {
     switch (payload.type) {
         case 'set':
-            saveUser(payload.data).then(() => {
-                console.log(payload.data)
-            })
+            window.localStorage.setItem(USER_KEY, JSON.stringify(payload.data))
             return payload.data
         case 'clear':
-            deleteUser().then(() => {
-                console.log(payload.data)
-            })
+            window.localStorage.removeItem(USER_KEY)
             return []
         default:
             return state
@@ -27,14 +23,15 @@ function AuthProvider({ children }) {
     const [state, dispatcher] = useReducer(AuthReducer, initialState)
 
     useEffect(() => {
-        getUser().then((dataUser) => {
-            if (dataUser?.id) {
-                dispatcher({
-                    type: 'set',
-                    data: dataUser,
-                })
-            }
-        })
+        let dataUser = window.localStorage.getItem(USER_KEY)
+        dataUser = JSON.parse(dataUser)
+
+        if (dataUser?.id) {
+            dispatcher({
+                type: 'set',
+                data: dataUser,
+            })
+        }
     }, [])
 
     return <AuthContext.Provider value={[state, dispatcher]}>{children}</AuthContext.Provider>

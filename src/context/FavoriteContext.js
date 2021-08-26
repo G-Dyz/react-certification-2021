@@ -1,25 +1,22 @@
 import React, { createContext, useReducer, useEffect } from 'react'
 import PropTypes from 'prop-types'
-import { saveFavorite, getFavorite, deleteFavorite } from '../storage/FavoriteAsyncStorage'
 
+const FAVORITE_KEY = '@Favorite:key'
 const initialState = []
 
 const FavoriteReducer = (state, payload) => {
     switch (payload.type) {
         case 'add':
-            saveFavorite(state.filter((_, index) => index !== payload.data)).then((data) => {
-                console.log(payload.data)
-            })
+            window.localStorage.setItem(FAVORITE_KEY, JSON.stringify([...state, payload.data]))
             return [...state, payload.data]
         case 'remove':
-            saveFavorite(state.filter((_, index) => index !== payload.data)).then((data) => {
-                console.log(payload.data)
-            })
+            window.localStorage.setItem(
+                FAVORITE_KEY,
+                JSON.stringify(state.filter((_, index) => index !== payload.data))
+            )
             return state.filter((_, index) => index !== payload.data)
         case 'clear':
-            deleteFavorite().then((data) => {
-                console.log(payload.data)
-            })
+            window.localStorage.removeItem(FAVORITE_KEY)
             return []
         case 'set':
             return payload.data
@@ -34,14 +31,15 @@ function FavoriteProvider({ children }) {
     const [state, dispatcher] = useReducer(FavoriteReducer, initialState)
 
     useEffect(() => {
-        getFavorite().then((dataArray) => {
-            if (dataArray?.length) {
-                dispatcher({
-                    type: 'set',
-                    data: dataArray,
-                })
-            }
-        })
+        let dataArray = window.localStorage.getItem(FAVORITE_KEY)
+        dataArray = JSON.parse(dataArray)
+
+        if (dataArray?.length) {
+            dispatcher({
+                type: 'set',
+                data: dataArray,
+            })
+        }
     }, [])
 
     return (

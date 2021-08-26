@@ -27,6 +27,7 @@ const VideoLink = styled(Link)`
 function Favorites() {
     const [favoriteContext, favoriteDispatcher] = useContext(FavoriteContext)
     const [themeContext, themeDispatcher] = useContext(ThemeContext)
+    console.log('***', favoriteContext)
 
     return (
         <Container themeContext={themeContext}>
