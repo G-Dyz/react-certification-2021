@@ -7,6 +7,7 @@ import SidebarData from './SidebarData'
 import SubMenu from '../Submenu/SubMenu.component'
 import Header from '../Header'
 import { ThemeContext } from '../../context/ThemeContext'
+import { AuthContext } from '../../context/AuthContext'
 import Colors from '../../styles/Colors'
 
 const NavIcon = styled(Link)`
@@ -55,6 +56,7 @@ const Sidebar = () => {
     const showSidebar = () => setSidebar(!sidebar)
 
     const [themeContext, themeDispatcher] = useContext(ThemeContext)
+    const [authContext, authDispatcher] = useContext(AuthContext)
 
     return (
         <>
@@ -72,7 +74,9 @@ const Sidebar = () => {
                         </NavIcon>
                     </HeaderContainer>
                     {SidebarData.map((item) => {
-                        return <SubMenu item={item} key={item.title} />
+                        return item.security && !authContext?.id ? null : (
+                            <SubMenu item={item} key={item.title} />
+                        )
                     })}
                 </SidebarWrap>
             </SidebarNav>

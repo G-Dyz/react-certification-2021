@@ -105,7 +105,7 @@ function Video({ history }) {
                                   key={item.snippet.publishedAt}
                                   role="figure"
                               >
-                                  <Card item={item.snippet} />
+                                  <Card item={item} />
                               </VideoLink>
                           ) : null
                       )
