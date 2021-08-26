@@ -1,13 +1,18 @@
 import { render, screen } from '@testing-library/react'
 import React from 'react'
 import Card from './Card.component'
+import { ThemeProvider } from '../../context/ThemeContext'
 import mockData from '../../mocks/youtube-videos-mock'
 
 describe('Card', () => {
     const itemCard = mockData.items[0].snippet
     itemCard.publishTime = itemCard.publishTime.substring(0, 10)
     beforeEach(() => {
-        return render(<Card item={itemCard} />)
+        return render(
+            <ThemeProvider>
+                <Card item={itemCard} />
+            </ThemeProvider>
+        )
     })
     it('should have all of its components', () => {
         expect(screen.getByRole('img')).toBeInTheDocument()

@@ -1,11 +1,12 @@
-import React, { useState } from 'react'
-import styled from 'styled-components'
+import React, { useState, useContext } from 'react'
+import styled, { createGlobalStyle } from 'styled-components'
 import { Link } from 'react-router-dom'
 
 import * as AiIcons from 'react-icons/ai'
 import SidebarData from './SidebarData'
 import SubMenu from '../Submenu/SubMenu.component'
 import Header from '../Header'
+import { ThemeContext } from '../../context/ThemeContext'
 import Colors from '../../styles/Colors'
 
 const NavIcon = styled(Link)`
@@ -17,7 +18,8 @@ const NavIcon = styled(Link)`
     color: white;
 `
 const SidebarNav = styled.nav`
-    background: ${Colors.SECONDARYCOLOR};
+    background: ${({ themeContext }) =>
+        themeContext ? Colors.LIGHT_SECONDARYCOLOR : Colors.DARK_SECONDARYCOLOR};
     width: 250px;
     height: 100vh;
     display: flex;
@@ -31,7 +33,8 @@ const SidebarWrap = styled.div`
     width: 100%;
 `
 const HeaderContainer = styled.div`
-    background-color: ${Colors.SECONDARYCOLOR};
+    background: ${({ themeContext }) =>
+        themeContext ? Colors.LIGHT_SECONDARYCOLOR : Colors.DARK_SECONDARYCOLOR};
     height: 56px;
     display: flex;
     flex-direction: row;
@@ -41,16 +44,29 @@ const HeaderContainer = styled.div`
     padding-right: 2rem;
 `
 
+const GlobalStyle = createGlobalStyle`
+  body {
+    background: ${({ themeContext }) => (themeContext ? Colors.LIGHT_NEUTRO : Colors.DARK_NEUTRO)}; 
+  }
+`
+
 const Sidebar = () => {
     const [sidebar, setSidebar] = useState(false)
     const showSidebar = () => setSidebar(!sidebar)
 
+    const [themeContext, themeDispatcher] = useContext(ThemeContext)
+
     return (
         <>
             <Header onHamburgerMenuClick={showSidebar} />
-            <SidebarNav sidebar={sidebar} role="navigation" data-testid="sidebar">
+            <SidebarNav
+                themeContext={themeContext}
+                sidebar={sidebar}
+                role="navigation"
+                data-testid="sidebar"
+            >
                 <SidebarWrap>
-                    <HeaderContainer>
+                    <HeaderContainer themeContext={themeContext}>
                         <NavIcon to="#" onClick={showSidebar} data-testid="closeHamburgerMenu">
                             <AiIcons.AiOutlineClose />
                         </NavIcon>
@@ -60,6 +76,7 @@ const Sidebar = () => {
                     })}
                 </SidebarWrap>
             </SidebarNav>
+            <GlobalStyle themeContext={themeContext} />
         </>
     )
 }

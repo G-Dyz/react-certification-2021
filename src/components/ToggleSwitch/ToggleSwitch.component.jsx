@@ -15,7 +15,7 @@ const SwitchLabel = styled.label`
     width: 70px;
     height: 32px;
     border-radius: 100px;
-    border: 2px solid gray;
+    border: 2px solid lightgray;
     position: relative;
     transition: background-color 0.2s;
 
@@ -32,8 +32,8 @@ const SwitchButton = styled.span`
     height: 25px;
     border-radius: 45px;
     transition: 0.2s;
-    background: grey;
-    box-shadow: 0 0 2px 0 rgba(10, 10, 10, 0.29);
+    background: lightgray;
+    box-shadow: 0 0 2px 0 lightgray;
 
     ${SwitchInput}:checked + ${SwitchLabel} & {
         left: calc(100% - 2px);

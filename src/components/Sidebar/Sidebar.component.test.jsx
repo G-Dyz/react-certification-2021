@@ -3,15 +3,18 @@ import React from 'react'
 import { BrowserRouter } from 'react-router-dom'
 import Sidebar from './Sidebar.component'
 import { TopicProvider } from '../../context/TopicContext'
+import { ThemeProvider } from '../../context/ThemeContext'
 
 describe('Sidebar', () => {
     beforeEach(() => {
         return render(
-            <TopicProvider>
-                <BrowserRouter>
-                    <Sidebar />
-                </BrowserRouter>
-            </TopicProvider>
+            <ThemeProvider>
+                <TopicProvider>
+                    <BrowserRouter>
+                        <Sidebar />
+                    </BrowserRouter>
+                </TopicProvider>
+            </ThemeProvider>
         )
     })
     it('has all of its components', () => {

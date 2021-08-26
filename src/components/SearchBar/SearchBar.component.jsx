@@ -1,5 +1,3 @@
-/* eslint no-unused-vars: "off" */
-
 import React, { useState, useContext } from 'react'
 import { useHistory } from 'react-router-dom'
 import styled from 'styled-components'

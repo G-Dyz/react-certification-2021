@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useContext } from 'react'
 import styled from 'styled-components'
 import { Link } from 'react-router-dom'
 
@@ -11,6 +11,8 @@ import ToggleSwitch from '../ToggleSwitch'
 
 import Colors from '../../styles/Colors'
 import Button from '../Button'
+
+import { ThemeContext } from '../../context/ThemeContext'
 
 const NavIcon = styled(Link)`
     font-size: 1.5rem;
@@ -29,7 +31,8 @@ const NavIcon = styled(Link)`
     }
 `
 const Container = styled.div`
-    background-color: ${Colors.SECONDARYCOLOR};
+    background: ${({ themeContext }) =>
+        themeContext ? Colors.LIGHT_SECONDARYCOLOR : Colors.DARK_SECONDARYCOLOR};
     height: 56px;
     display: flex;
     flex-direction: row;
@@ -49,8 +52,10 @@ function Header({ onHamburgerMenuClick }) {
     const [isToggled, setIsToggled] = useState(false)
     const pressHandler = () => onHamburgerMenuClick()
 
+    const [themeContext, themeDispatcher] = useContext(ThemeContext)
+
     return (
-        <Container role="navigation">
+        <Container themeContext={themeContext} role="navigation">
             <Group>
                 <NavIcon to="#" data-testid="hamburgerMenu" onClick={pressHandler}>
                     <FaIcons.FaBars />
@@ -67,7 +72,10 @@ function Header({ onHamburgerMenuClick }) {
                 <ToggleSwitch
                     id="theme-toggle"
                     toggled={isToggled}
-                    onChange={(e) => setIsToggled(e.target.checked)}
+                    onChange={(e) => {
+                        setIsToggled(e.target.checked)
+                        themeDispatcher()
+                    }}
                 />
                 <Button tittle="SIGN IN" />
             </Group>

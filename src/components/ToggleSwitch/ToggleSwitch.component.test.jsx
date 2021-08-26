@@ -8,7 +8,7 @@ describe('ToggleSwitch', () => {
         const checkbox = screen.getByTestId('checkbox')
 
         expect(checkbox.checked).toEqual(false)
-        expect(screen.getByTestId('switch')).toHaveStyle(`background: grey;`)
+        expect(screen.getByTestId('switch')).toHaveStyle(`background: lightgray;`)
 
         fireEvent.click(checkbox)
         expect(checkbox.checked).toEqual(true)
@@ -16,6 +16,6 @@ describe('ToggleSwitch', () => {
 
         fireEvent.click(checkbox)
         expect(checkbox.checked).toEqual(false)
-        expect(screen.getByTestId('switch')).toHaveStyle(`background: grey;`)
+        expect(screen.getByTestId('switch')).toHaveStyle(`background: lightgray;`)
     })
 })

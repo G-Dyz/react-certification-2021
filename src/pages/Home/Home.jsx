@@ -1,20 +1,19 @@
-/* eslint no-unused-vars: "off" */
-
 import React, { useState, useEffect, useContext } from 'react'
 import { Link } from 'react-router-dom'
 import styled from 'styled-components'
-import mockData from '../../mocks/youtube-videos-mock'
 import Card from '../../components/Card'
 import { TopicContext } from '../../context/TopicContext'
+import { ThemeContext } from '../../context/ThemeContext'
 
 import API from '../../services/youtube.service'
+import Colors from '../../styles/Colors'
 
 const Container = styled.div`
-    background: white;
+    background: ${({ themeContext }) => (themeContext ? Colors.LIGHT_NEUTRO : Colors.DARK_NEUTRO)};
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
-    align-items: center;
+    align-items: flex-start;
     padding-top: 24px;
     padding-bottom: 24px;
 `
@@ -29,6 +28,8 @@ const VideoLink = styled(Link)`
 function Home() {
     const [videos, setVideos] = useState('')
     const [topicContext, topicDispatcher] = useContext(TopicContext)
+    const [themeContext, themeDispatcher] = useContext(ThemeContext)
+
     const onSearch = async (keyword) => {
         const response = await API.get('/search', {
             params: {
@@ -43,7 +44,7 @@ function Home() {
     }, [topicContext])
 
     return (
-        <Container>
+        <Container themeContext={themeContext}>
             {videos?.length &&
                 videos.map((item) => (
                     <VideoLink
