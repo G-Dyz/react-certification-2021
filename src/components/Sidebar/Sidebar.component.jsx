@@ -29,6 +29,7 @@ const SidebarNav = styled.nav`
     top: 0;
     left: ${({ sidebar }) => (sidebar ? '0' : '-100%')};
     transition: 350ms;
+    z-index: 1;
 `
 const SidebarWrap = styled.div`
     width: 100%;
@@ -44,7 +45,13 @@ const HeaderContainer = styled.div`
     padding-left: 2rem;
     padding-right: 2rem;
 `
-
+const ShadowBox = styled.div`
+    width: 100%;
+    height: 100vh;
+    position: absolute;
+    background: rgb(0, 0, 0, 0.25);
+    z-index: 1;
+`
 const GlobalStyle = createGlobalStyle`
   body {
     background: ${({ themeContext }) => (themeContext ? Colors.LIGHT_NEUTRO : Colors.DARK_NEUTRO)}; 
@@ -60,6 +67,7 @@ const Sidebar = () => {
 
     return (
         <>
+            {sidebar && <ShadowBox onClick={showSidebar} />}
             <Header onHamburgerMenuClick={showSidebar} />
             <SidebarNav
                 themeContext={themeContext}
@@ -75,7 +83,11 @@ const Sidebar = () => {
                     </HeaderContainer>
                     {SidebarData.map((item) => {
                         return item.security && !authContext?.id ? null : (
-                            <SubMenu item={item} key={item.title} />
+                            <SubMenu
+                                item={item}
+                                key={item.title}
+                                onClickCloseSidebar={showSidebar}
+                            />
                         )
                     })}
                 </SidebarWrap>

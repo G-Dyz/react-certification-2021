@@ -140,7 +140,7 @@ test('should allow login', () => {
         expect(screen.getByRole('form')).toBeInTheDocument()
         expect(screen.getAllByRole('contentinfo').length).toEqual(2)
 
-        const userInput = screen.getByPlaceholderText('email')
+        const userInput = screen.getByPlaceholderText('username')
         fireEvent.change(userInput, { target: { value: 'wizeline' } })
 
         const passswordInput = screen.getByPlaceholderText('password')

@@ -1,7 +1,7 @@
 import React, { useContext } from 'react'
 import styled from 'styled-components'
 import PropTypes from 'prop-types'
-import { AiFillEye, AiFillHeart } from 'react-icons/ai'
+import { AiFillEye, AiFillHeart, AiFillCloseCircle } from 'react-icons/ai'
 import Device from '../../styles/Device'
 import { ThemeContext } from '../../context/ThemeContext'
 import { FavoriteContext } from '../../context/FavoriteContext'
@@ -67,7 +67,7 @@ const Text = styled.p`
     overflow: hidden;
     white-space: nowrap;
     text-overflow: ellipsis;
-    color: #606060;
+    color: ${Colors.GRAY};
     font-size: 0.95em;
 `
 const Icon = styled.div`
@@ -76,11 +76,11 @@ const Icon = styled.div`
     display: flex;
     justify-content: flex-start;
     align-items: center;
-    color: white;
+    color: ${Colors.WHITE};
     position: absolute;
 `
 
-function Card({ item }) {
+function Card({ item, isFavorite }) {
     const [themeContext, themeDispatcher] = useContext(ThemeContext)
     const [favoriteContext, favoriteDispatcher] = useContext(FavoriteContext)
     const capitalizeFirstLetterSentence = (mySentence) => {
@@ -92,15 +92,27 @@ function Card({ item }) {
             <img src={item.snippet.thumbnails.medium.url} alt={item.snippet.title} />
             <Icon>
                 <AiFillEye />
-                <AiFillHeart
-                    onClick={(e) => {
-                        favoriteDispatcher({
-                            type: 'add',
-                            data: item,
-                        })
-                        e.preventDefault()
-                    }}
-                />
+                {isFavorite ? (
+                    <AiFillCloseCircle
+                        onClick={(e) => {
+                            favoriteDispatcher({
+                                type: 'remove',
+                                data: item,
+                            })
+                            e.preventDefault()
+                        }}
+                    />
+                ) : (
+                    <AiFillHeart
+                        onClick={(e) => {
+                            favoriteDispatcher({
+                                type: 'add',
+                                data: item,
+                            })
+                            e.preventDefault()
+                        }}
+                    />
+                )}
             </Icon>
             <Tittle themecontext={themeContext} role="contentinfo">
                 {item.snippet.title}
@@ -109,7 +121,7 @@ function Card({ item }) {
                 {capitalizeFirstLetterSentence(item.snippet.channelTitle)}
             </Text>
             <Text role="contentinfo">{item.snippet.description}</Text>
-            <Text role="contentinfo">{item.snippet.publishTime.substring(0, 10)}</Text>
+            <Text role="contentinfo">{item.snippet.publishedAt.substring(0, 10)}</Text>
         </Container>
     )
 }
@@ -120,7 +132,7 @@ Card.propTypes = {
             title: PropTypes.string,
             channelTitle: PropTypes.string,
             description: PropTypes.string,
-            publishTime: PropTypes.string,
+            publishedAt: PropTypes.string,
             thumbnails: PropTypes.shape({
                 medium: PropTypes.shape({
                     url: PropTypes.string,
@@ -128,6 +140,7 @@ Card.propTypes = {
             }),
         }),
     }),
+    isFavorite: PropTypes.bool,
 }
 
 Card.defaultProps = {
@@ -136,10 +149,11 @@ Card.defaultProps = {
             title: null,
             channelTitle: null,
             description: null,
-            publishTime: null,
+            publishedAt: null,
             thumbnails: null,
         }),
     }),
+    isFavorite: true,
 }
 
 export default Card

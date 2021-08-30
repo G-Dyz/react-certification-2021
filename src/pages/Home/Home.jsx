@@ -52,7 +52,7 @@ function Home() {
                         key={item.snippet.publishedAt}
                         role="figure"
                     >
-                        <Card item={item} />
+                        <Card item={item} isFavorite={false} />
                     </VideoLink>
                 ))}
         </Container>

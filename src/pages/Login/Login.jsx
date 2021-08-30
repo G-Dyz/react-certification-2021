@@ -1,5 +1,6 @@
 import React, { useContext, useState } from 'react'
 import styled from 'styled-components'
+import { useHistory } from 'react-router-dom'
 import Form from '../../components/Form'
 import LoginApi from './Login.api'
 import { AuthContext } from '../../context/AuthContext'
@@ -13,6 +14,8 @@ const Container = styled.div`
 function Login() {
     const [authContext, authDispatcher] = useContext(AuthContext)
     const [error, setError] = useState(false)
+    const history = useHistory()
+    const navigateTo = () => history.push('/home')
 
     const loginAction = async (username, password) => {
         try {
@@ -24,6 +27,8 @@ function Login() {
                     data: response,
                 })
             }
+            alert(`Welcome ${username}!`)
+            navigateTo()
         } catch (e) {
             console.log(e)
             setError(true)

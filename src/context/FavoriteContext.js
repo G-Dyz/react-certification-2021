@@ -7,14 +7,23 @@ const initialState = []
 const FavoriteReducer = (state, payload) => {
     switch (payload.type) {
         case 'add':
+            if (
+                state.filter(
+                    (item) =>
+                        (item.id.videoId || item.id) ===
+                        (payload.data.id.videoId || payload.data.id)
+                ).length > 0
+            ) {
+                return state
+            }
             window.localStorage.setItem(FAVORITE_KEY, JSON.stringify([...state, payload.data]))
             return [...state, payload.data]
         case 'remove':
             window.localStorage.setItem(
                 FAVORITE_KEY,
-                JSON.stringify(state.filter((_, index) => index !== payload.data))
+                JSON.stringify(state.filter((item) => item.etag !== payload.data.etag))
             )
-            return state.filter((_, index) => index !== payload.data)
+            return state.filter((item) => item.etag !== payload.data.etag)
         case 'clear':
             window.localStorage.removeItem(FAVORITE_KEY)
             return []

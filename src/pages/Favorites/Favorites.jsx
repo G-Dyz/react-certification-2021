@@ -34,7 +34,10 @@ function Favorites() {
             {favoriteContext?.length ? (
                 favoriteContext.map((item) => (
                     <VideoLink
-                        to={{ pathname: `/video`, search: `?videoUrl=${item.id.videoId}` }}
+                        to={{
+                            pathname: `/video`,
+                            search: `?videoUrl=${item.id.videoId || item.id}`,
+                        }}
                         key={item.snippet.publishedAt}
                         role="figure"
                     >

@@ -42,7 +42,7 @@ const Container = styled.div`
     button {
         background: ${({ themecontext }) =>
             themecontext ? Colors.LIGHT_SECONDARYCOLOR : Colors.DARK_PRIMARYCOLOR};
-        color: #fff;
+        color: ${Colors.WHITE};
         padding: 10px;
         width: 150px;
         border: none;
@@ -79,8 +79,8 @@ const Icon = styled.div`
 
 function Login({ onSubmitClick }) {
     const [themeContext, themeDispatcher] = useContext(ThemeContext)
-    const pressHandler = (emailForm, passwordForm) => onSubmitClick(emailForm, passwordForm)
-    const [email, setEmail] = useState('')
+    const pressHandler = (usernameForm, passwordForm) => onSubmitClick(usernameForm, passwordForm)
+    const [username, setUsername] = useState('')
     const [password, setPassword] = useState('')
 
     return (
@@ -94,10 +94,10 @@ function Login({ onSubmitClick }) {
             <form>
                 <Input
                     type="text"
-                    placeholder="email"
-                    value={email}
+                    placeholder="username"
+                    value={username}
                     onChange={(event) => {
-                        setEmail(event.target.value)
+                        setUsername(event.target.value)
                     }}
                     themecontext={themeContext}
                     role="textbox"
@@ -115,8 +115,8 @@ function Login({ onSubmitClick }) {
                 <button
                     type="submit"
                     onClick={(e) => {
-                        pressHandler(email, password)
-                        setEmail('')
+                        pressHandler(username, password)
+                        setUsername('')
                         setPassword('')
                         e.preventDefault()
                     }}
