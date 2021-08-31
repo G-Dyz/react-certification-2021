@@ -5,7 +5,6 @@ import { Link, useHistory } from 'react-router-dom'
 import * as FaIcons from 'react-icons/fa'
 import * as AiIcons from 'react-icons/ai'
 import * as IoIcons from 'react-icons/io5'
-// import * as RiIcons from 'react-icons/ri'
 
 import PropTypes from 'prop-types'
 
@@ -89,7 +88,7 @@ function Header({ onHamburgerMenuClick }) {
     const history = useHistory()
 
     const [themeContext, themeDispatcher] = useContext(ThemeContext)
-    const [authContext, authDispatcher] = useContext(AuthContext)
+    const [authContext, setAuth] = useContext(AuthContext)
 
     return (
         <Container themeContext={themeContext} role="navigation">
@@ -123,14 +122,13 @@ function Header({ onHamburgerMenuClick }) {
                                 setMenuSign(!menuSign)
                                 e.preventDefault()
                             }}
+                            data-testid="logo-user"
                         />
                         {menuSign && (
                             <MenuUser>
                                 <Option
                                     onClick={(e) => {
-                                        authDispatcher({
-                                            type: 'clear',
-                                        })
+                                        setAuth()
                                         setMenuSign(!menuSign)
                                         e.preventDefault()
                                     }}
@@ -146,6 +144,7 @@ function Header({ onHamburgerMenuClick }) {
                                         e.preventDefault()
                                     }}
                                     themeContext={themeContext}
+                                    data-testid="help-user"
                                 >
                                     <IoIcons.IoHelp />
                                     <p>Help</p>

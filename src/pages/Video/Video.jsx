@@ -66,7 +66,7 @@ function Video({ history }) {
                     id: idVideo,
                 },
             })
-
+            console.log(response)
             setVideo(response.data.items[0])
         }
     }
@@ -84,9 +84,7 @@ function Video({ history }) {
     }
     const validateIsFavorite = () => {
         return (
-            favoriteContext.filter(
-                (item) => (item.id.videoId || item.id) === (video.id.videoId || video.id)
-            ).length > 0
+            favoriteContext.filter((item) => (item.id.videoId || item.id) === video.id).length > 0
         )
     }
 

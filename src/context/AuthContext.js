@@ -22,19 +22,34 @@ const AuthContext = createContext(initialState)
 function AuthProvider({ children }) {
     const [state, dispatcher] = useReducer(AuthReducer, initialState)
 
+    const setAuth = (itemArray) => {
+        if (itemArray === null || itemArray === undefined) {
+            dispatcher({
+                type: 'clear',
+            })
+        } else {
+            dispatcher({
+                type: 'set',
+                data: itemArray,
+            })
+        }
+    }
+    const getAuth = () => {
+        dispatcher({
+            type: '',
+        })
+    }
+
     useEffect(() => {
         let dataUser = window.localStorage.getItem(USER_KEY)
         dataUser = JSON.parse(dataUser)
 
         if (dataUser?.id) {
-            dispatcher({
-                type: 'set',
-                data: dataUser,
-            })
+            setAuth(dataUser)
         }
     }, [])
 
-    return <AuthContext.Provider value={[state, dispatcher]}>{children}</AuthContext.Provider>
+    return <AuthContext.Provider value={[state, setAuth, getAuth]}>{children}</AuthContext.Provider>
 }
 
 export { AuthContext, AuthProvider }

@@ -24,7 +24,7 @@ describe('Card', () => {
             <AuthProvider>
                 <FavoriteProvider>
                     <ThemeProvider>
-                        <Card item={mockData.items[0]} isFavorite={false} />
+                        <Card item={mockData.items[0]} />
                     </ThemeProvider>
                 </FavoriteProvider>
             </AuthProvider>
@@ -46,9 +46,9 @@ describe('Card', () => {
         expect(imgCard).toHaveAttribute('alt', itemCard.title)
     })
     it('should save the video like favorite', async () => {
-        fireEvent.click(screen.getByTestId('add-favorite-card'))
+        fireEvent.click(screen.getByTestId('remove-favorite-card'))
         setTimeout(() => {
-            expect(screen.getByTestId('remove-favorite-card')).toBeInTheDocument()
+            expect(screen.getByTestId('add-favorite-card')).toBeInTheDocument()
         }, 1500)
     })
 })

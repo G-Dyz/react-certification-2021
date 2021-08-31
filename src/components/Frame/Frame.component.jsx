@@ -6,6 +6,7 @@ import PropTypes from 'prop-types'
 import Device from '../../styles/Device'
 import { ThemeContext } from '../../context/ThemeContext'
 import { FavoriteContext } from '../../context/FavoriteContext'
+import { AuthContext } from '../../context/AuthContext'
 import Colors from '../../styles/Colors'
 
 const Container = styled.div`
@@ -90,7 +91,8 @@ const Separator = styled.hr`
 
 function Frame({ video, isFavorite }) {
     const [themeContext, themeDispatcher] = useContext(ThemeContext)
-    const [favoriteContext, favoriteDispatcher] = useContext(FavoriteContext)
+    const [favoriteContext, addFavorite, removeFavorite] = useContext(FavoriteContext)
+    const [authContext, setAuth] = useContext(AuthContext)
 
     return (
         <Container>
@@ -117,33 +119,30 @@ function Frame({ video, isFavorite }) {
                                     {video.snippet.publishedAt.substring(0, 10)}
                                 </p>
                             </div>
-                            {isFavorite ? (
-                                <Icon
-                                    onClick={(e) => {
-                                        favoriteDispatcher({
-                                            type: 'remove',
-                                            data: video,
-                                        })
-                                        e.preventDefault()
-                                    }}
-                                >
-                                    <IconName.BiListMinus />
-                                    <IconText>Remove</IconText>
-                                </Icon>
-                            ) : (
-                                <Icon
-                                    onClick={(e) => {
-                                        favoriteDispatcher({
-                                            type: 'add',
-                                            data: video,
-                                        })
-                                        e.preventDefault()
-                                    }}
-                                >
-                                    <IconName.BiListPlus />
-                                    <IconText>Save</IconText>
-                                </Icon>
-                            )}
+                            {authContext?.id &&
+                                (isFavorite ? (
+                                    <Icon
+                                        onClick={(e) => {
+                                            removeFavorite(video)
+                                            e.preventDefault()
+                                        }}
+                                        data-testid="remove-favorite"
+                                    >
+                                        <IconName.BiListMinus />
+                                        <IconText>Remove</IconText>
+                                    </Icon>
+                                ) : (
+                                    <Icon
+                                        onClick={(e) => {
+                                            addFavorite(video)
+                                            e.preventDefault()
+                                        }}
+                                        data-testid="add-favorite"
+                                    >
+                                        <IconName.BiListPlus />
+                                        <IconText>Save</IconText>
+                                    </Icon>
+                                ))}
                         </Info>
                     </CardDetail>
                     <Separator />
@@ -170,7 +169,7 @@ Frame.propTypes = {
 
 Frame.defaultProps = {
     video: PropTypes.shape({
-        id: null,
+        id: '',
         snippet: {
             localized: {
                 title: '',
@@ -180,7 +179,7 @@ Frame.defaultProps = {
             publishedAt: '',
         },
     }),
-    isFavorite: false,
+    isFavorite: true,
 }
 
 export default Frame

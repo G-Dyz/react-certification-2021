@@ -7,11 +7,14 @@ import { ThemeProvider } from '../../context/ThemeContext'
 
 describe('SubMenu', () => {
     const itemMenu = SidebarData[0]
+    const showSidebar = () => {
+        console.log('')
+    }
     beforeEach(() => {
         return render(
             <ThemeProvider>
                 <BrowserRouter>
-                    <SubMenu item={itemMenu} />
+                    <SubMenu item={itemMenu} onClickCloseSidebar={showSidebar} />
                 </BrowserRouter>
             </ThemeProvider>
         )

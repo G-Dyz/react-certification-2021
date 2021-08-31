@@ -54,7 +54,7 @@ function SubMenu({ item, onClickCloseSidebar }) {
         <>
             <SidebarLink
                 to={item.path}
-                onClick={pressHandler || (item.subNav && showSubNav)}
+                onClick={item.subNav ? showSubNav : pressHandler}
                 themecontext={+themeContext}
                 role="contentinfo"
             >

@@ -21,9 +21,18 @@ const FavoriteReducer = (state, payload) => {
         case 'remove':
             window.localStorage.setItem(
                 FAVORITE_KEY,
-                JSON.stringify(state.filter((item) => item.etag !== payload.data.etag))
+                JSON.stringify(
+                    state.filter(
+                        (item) =>
+                            (item.id.videoId || item.id) !==
+                            (payload.data.id.videoId || payload.data.id)
+                    )
+                )
             )
-            return state.filter((item) => item.etag !== payload.data.etag)
+            return state.filter(
+                (item) =>
+                    (item.id.videoId || item.id) !== (payload.data.id.videoId || payload.data.id)
+            )
         case 'clear':
             window.localStorage.removeItem(FAVORITE_KEY)
             return []
@@ -39,20 +48,50 @@ const FavoriteContext = createContext(initialState)
 function FavoriteProvider({ children }) {
     const [state, dispatcher] = useReducer(FavoriteReducer, initialState)
 
+    const addFavorite = (itemArray) => {
+        dispatcher({
+            type: 'add',
+            data: itemArray,
+        })
+    }
+    const removeFavorite = (item) => {
+        dispatcher({
+            type: 'remove',
+            data: item,
+        })
+    }
+    const clearFavorite = () => {
+        dispatcher({
+            type: 'clear',
+        })
+    }
+    const setFavorite = (itemArray) => {
+        dispatcher({
+            type: 'set',
+            data: itemArray,
+        })
+    }
+    const getFavorite = () => {
+        dispatcher({
+            type: '',
+        })
+    }
+
     useEffect(() => {
         let dataArray = window.localStorage.getItem(FAVORITE_KEY)
         dataArray = JSON.parse(dataArray)
 
         if (dataArray?.length) {
-            dispatcher({
-                type: 'set',
-                data: dataArray,
-            })
+            setFavorite(dataArray)
         }
     }, [])
 
     return (
-        <FavoriteContext.Provider value={[state, dispatcher]}>{children}</FavoriteContext.Provider>
+        <FavoriteContext.Provider
+            value={[state, addFavorite, removeFavorite, clearFavorite, getFavorite]}
+        >
+            {children}
+        </FavoriteContext.Provider>
     )
 }
 

@@ -40,7 +40,10 @@
         "beforeEach":true,
         "test":true,
         "window":true,
-        "alert":true
+        "alert":true,
+        "jest":true,
+        "waitFor":true,
+        "reject":true
     },
     "overrides": [
         {

@@ -5,6 +5,7 @@ import { AiFillEye, AiFillHeart, AiFillCloseCircle } from 'react-icons/ai'
 import Device from '../../styles/Device'
 import { ThemeContext } from '../../context/ThemeContext'
 import { FavoriteContext } from '../../context/FavoriteContext'
+import { AuthContext } from '../../context/AuthContext'
 import Colors from '../../styles/Colors'
 
 const Container = styled.div`
@@ -82,7 +83,9 @@ const Icon = styled.div`
 
 function Card({ item, isFavorite }) {
     const [themeContext, themeDispatcher] = useContext(ThemeContext)
-    const [favoriteContext, favoriteDispatcher] = useContext(FavoriteContext)
+    const [favoriteContext, addFavorite, removeFavorite] = useContext(FavoriteContext)
+    const [authContext, setAuth] = useContext(AuthContext)
+
     const capitalizeFirstLetterSentence = (mySentence) => {
         return mySentence.replace(/(^\w{1})|(\s+\w{1})/g, (letter) => letter.toUpperCase())
     }
@@ -92,27 +95,24 @@ function Card({ item, isFavorite }) {
             <img src={item.snippet.thumbnails.medium.url} alt={item.snippet.title} />
             <Icon>
                 <AiFillEye />
-                {isFavorite ? (
-                    <AiFillCloseCircle
-                        onClick={(e) => {
-                            favoriteDispatcher({
-                                type: 'remove',
-                                data: item,
-                            })
-                            e.preventDefault()
-                        }}
-                    />
-                ) : (
-                    <AiFillHeart
-                        onClick={(e) => {
-                            favoriteDispatcher({
-                                type: 'add',
-                                data: item,
-                            })
-                            e.preventDefault()
-                        }}
-                    />
-                )}
+                {authContext?.id &&
+                    (isFavorite ? (
+                        <AiFillCloseCircle
+                            onClick={(e) => {
+                                removeFavorite(item)
+                                e.preventDefault()
+                            }}
+                            data-testid="remove-favorite-card"
+                        />
+                    ) : (
+                        <AiFillHeart
+                            onClick={(e) => {
+                                addFavorite(item)
+                                e.preventDefault()
+                            }}
+                            data-testid="add-favorite-card"
+                        />
+                    ))}
             </Icon>
             <Tittle themecontext={themeContext} role="contentinfo">
                 {item.snippet.title}

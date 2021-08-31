@@ -10,6 +10,6 @@ describe('Help', () => {
                 <Help />
             </ThemeProvider>
         )
-        expect(screen.getByText('Help')).toBeInTheDocument()
+        expect(screen.getByText('Frequently Asked Questions')).toBeInTheDocument()
     })
 })
