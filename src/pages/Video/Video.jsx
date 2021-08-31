@@ -66,7 +66,6 @@ function Video({ history }) {
                     id: idVideo,
                 },
             })
-            console.log(response)
             setVideo(response.data.items[0])
         }
     }

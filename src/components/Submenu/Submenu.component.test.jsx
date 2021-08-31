@@ -8,7 +8,7 @@ import { ThemeProvider } from '../../context/ThemeContext'
 describe('SubMenu', () => {
     const itemMenu = SidebarData[0]
     const showSidebar = () => {
-        console.log('')
+        console.log('show')
     }
     beforeEach(() => {
         return render(
