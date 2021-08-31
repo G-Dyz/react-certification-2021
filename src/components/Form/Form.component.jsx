@@ -1,5 +1,6 @@
-import React, { useContext } from 'react'
+import React, { useContext, useState } from 'react'
 import styled from 'styled-components'
+import PropTypes from 'prop-types'
 import * as AiIcons from 'react-icons/ai'
 import { ThemeContext } from '../../context/ThemeContext'
 import Colors from '../../styles/Colors'
@@ -76,8 +77,12 @@ const Icon = styled.div`
     }
 `
 
-function Login() {
+function Login({ onSubmitClick }) {
     const [themeContext, themeDispatcher] = useContext(ThemeContext)
+    const pressHandler = (emailForm, passwordForm) => onSubmitClick(emailForm, passwordForm)
+    const [email, setEmail] = useState('')
+    const [password, setPassword] = useState('')
+
     return (
         <Container themecontext={themeContext} role="form">
             <Icon themecontext={themeContext}>
@@ -87,17 +92,49 @@ function Login() {
             <h1 role="contentinfo">Sign in</h1>
             <h2 role="contentinfo">to continue to YouTube</h2>
             <form>
-                <Input type="text" placeholder="email" themecontext={themeContext} role="textbox" />
                 <Input
-                    type="password"
-                    placeholder="password"
+                    type="text"
+                    placeholder="email"
+                    value={email}
+                    onChange={(event) => {
+                        setEmail(event.target.value)
+                    }}
                     themecontext={themeContext}
                     role="textbox"
                 />
-                <button type="button">Login</button>
+                <Input
+                    type="password"
+                    placeholder="password"
+                    value={password}
+                    onChange={(event) => {
+                        setPassword(event.target.value)
+                    }}
+                    themecontext={themeContext}
+                    role="textbox"
+                />
+                <button
+                    type="submit"
+                    onClick={(e) => {
+                        pressHandler(email, password)
+                        setEmail('')
+                        setPassword('')
+                        e.preventDefault()
+                    }}
+                    data-testid="submit-button"
+                >
+                    Login
+                </button>
             </form>
         </Container>
     )
+}
+
+Login.propTypes = {
+    onSubmitClick: PropTypes.func,
+}
+
+Login.defaultProps = {
+    onSubmitClick: null,
 }
 
 export default Login

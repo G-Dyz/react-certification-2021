@@ -10,7 +10,7 @@ describe('Card', () => {
     beforeEach(() => {
         return render(
             <ThemeProvider>
-                <Card item={itemCard} />
+                <Card item={mockData.items[0]} />
             </ThemeProvider>
         )
     })

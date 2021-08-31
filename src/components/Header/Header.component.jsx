@@ -13,6 +13,7 @@ import Colors from '../../styles/Colors'
 import Button from '../Button'
 
 import { ThemeContext } from '../../context/ThemeContext'
+import { AuthContext } from '../../context/AuthContext'
 
 const NavIcon = styled(Link)`
     font-size: 1.5rem;
@@ -48,11 +49,16 @@ const Group = styled.div`
     align-items: center;
     gap: 16px;
 `
+const Image = styled.img`
+    width: 32px;
+    border-radius: 50%;
+`
 function Header({ onHamburgerMenuClick }) {
     const [isToggled, setIsToggled] = useState(false)
     const pressHandler = () => onHamburgerMenuClick()
 
     const [themeContext, themeDispatcher] = useContext(ThemeContext)
+    const [authContext, authDispatcher] = useContext(AuthContext)
 
     return (
         <Container themeContext={themeContext} role="navigation">
@@ -77,7 +83,20 @@ function Header({ onHamburgerMenuClick }) {
                         themeDispatcher()
                     }}
                 />
-                <Button tittle="SIGN IN" />
+                {authContext?.id ? (
+                    <Image
+                        src={authContext.avatarUrl}
+                        alt={authContext.name}
+                        onClick={(e) => {
+                            authDispatcher({
+                                type: 'clear',
+                            })
+                            e.preventDefault()
+                        }}
+                    />
+                ) : (
+                    <Button tittle="SIGN IN" />
+                )}
             </Group>
         </Container>
     )

@@ -131,3 +131,25 @@ test('should change content of video page', () => {
         expect(hrefBefore !== hrefAfter).toBeTruthy()
     }, 1500)
 })
+
+test('should allow login', () => {
+    render(<App />)
+    fireEvent.click(screen.getByText('SIGN IN'))
+
+    setTimeout(() => {
+        expect(screen.getByRole('form')).toBeInTheDocument()
+        expect(screen.getAllByRole('contentinfo').length).toEqual(2)
+
+        const userInput = screen.getByPlaceholderText('email')
+        fireEvent.change(userInput, { target: { value: 'wizeline' } })
+
+        const passswordInput = screen.getByPlaceholderText('password')
+        fireEvent.change(passswordInput, { target: { value: 'Rocks!' } })
+
+        fireEvent.click(screen.getByTestId('submit-button'))
+    }, 1500)
+
+    setTimeout(() => {
+        fireEvent.click(screen.getByText('Favorites'))
+    }, 1500)
+})

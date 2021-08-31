@@ -4,6 +4,7 @@ import PropTypes from 'prop-types'
 import { AiFillEye, AiFillHeart } from 'react-icons/ai'
 import Device from '../../styles/Device'
 import { ThemeContext } from '../../context/ThemeContext'
+import { FavoriteContext } from '../../context/FavoriteContext'
 import Colors from '../../styles/Colors'
 
 const Container = styled.div`
@@ -81,35 +82,49 @@ const Icon = styled.div`
 
 function Card({ item }) {
     const [themeContext, themeDispatcher] = useContext(ThemeContext)
+    const [favoriteContext, favoriteDispatcher] = useContext(FavoriteContext)
     const capitalizeFirstLetterSentence = (mySentence) => {
         return mySentence.replace(/(^\w{1})|(\s+\w{1})/g, (letter) => letter.toUpperCase())
     }
+
     return (
         <Container role="gridcell">
-            <img src={item.thumbnails.medium.url} alt={item.title} />
+            <img src={item.snippet.thumbnails.medium.url} alt={item.snippet.title} />
             <Icon>
                 <AiFillEye />
-                <AiFillHeart />
+                <AiFillHeart
+                    onClick={(e) => {
+                        favoriteDispatcher({
+                            type: 'add',
+                            data: item,
+                        })
+                        e.preventDefault()
+                    }}
+                />
             </Icon>
             <Tittle themecontext={themeContext} role="contentinfo">
-                {item.title}
+                {item.snippet.title}
             </Tittle>
-            <Text role="contentinfo">{capitalizeFirstLetterSentence(item.channelTitle)}</Text>
-            <Text role="contentinfo">{item.description}</Text>
-            <Text role="contentinfo">{item.publishTime.substring(0, 10)}</Text>
+            <Text role="contentinfo">
+                {capitalizeFirstLetterSentence(item.snippet.channelTitle)}
+            </Text>
+            <Text role="contentinfo">{item.snippet.description}</Text>
+            <Text role="contentinfo">{item.snippet.publishTime.substring(0, 10)}</Text>
         </Container>
     )
 }
 
 Card.propTypes = {
     item: PropTypes.shape({
-        title: PropTypes.string,
-        channelTitle: PropTypes.string,
-        description: PropTypes.string,
-        publishTime: PropTypes.string,
-        thumbnails: PropTypes.shape({
-            medium: PropTypes.shape({
-                url: PropTypes.string,
+        snippet: PropTypes.shape({
+            title: PropTypes.string,
+            channelTitle: PropTypes.string,
+            description: PropTypes.string,
+            publishTime: PropTypes.string,
+            thumbnails: PropTypes.shape({
+                medium: PropTypes.shape({
+                    url: PropTypes.string,
+                }),
             }),
         }),
     }),
@@ -117,11 +132,13 @@ Card.propTypes = {
 
 Card.defaultProps = {
     item: PropTypes.shape({
-        title: null,
-        channelTitle: null,
-        description: null,
-        publishTime: null,
-        thumbnails: null,
+        snippet: PropTypes.shape({
+            title: null,
+            channelTitle: null,
+            description: null,
+            publishTime: null,
+            thumbnails: null,
+        }),
     }),
 }
 

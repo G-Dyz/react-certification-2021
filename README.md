@@ -1,3 +1,20 @@
+# Youtube
+
+## Demo
+
+
+## Usage
+
+Add the next files
+
+- .env.development
+- .env.production
+
+Add the next lines inside the files
+
+`REACT_APP_API = https://www.googleapis.com/youtube/v3
+REACT_APP_KEY = 'Put here your key api'`
+
 # Wizeline Academy - 2021 React Bootcamp
 
 Please refere to the following [GIST](https://gist.github.com/villacoder/9f980254461fa8bfbe93067db2126872) for further instructions

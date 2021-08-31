@@ -12,26 +12,33 @@ import Video from './pages/Video'
 import Footer from './components/Footer'
 import { TopicProvider } from './context/TopicContext'
 import { ThemeProvider } from './context/ThemeContext'
+import { AuthProvider } from './context/AuthContext'
+import { FavoriteProvider } from './context/FavoriteContext'
+import ProtectedRoute from './components/ProtectedRoute'
 
 function App() {
     return (
         <ThemeProvider>
-            <TopicProvider>
-                <BrowserRouter>
-                    <Sidebar />
-                    <Switch>
-                        <Route path="/" exact component={Home} />
-                        <Route path="/home" exact component={Home} />
-                        <Route path="/login" exact component={Login} />
-                        <Route path="/secret" exact component={Secret} />
-                        <Route path="/favorites" exact component={Favorites} />
-                        <Route path="/help" exact component={Help} />
-                        <Route path="/video" exact component={Video} />
-                        <Route path="*" exact component={NotFound} />
-                    </Switch>
-                    <Footer />
-                </BrowserRouter>
-            </TopicProvider>
+            <AuthProvider>
+                <FavoriteProvider>
+                    <TopicProvider>
+                        <BrowserRouter>
+                            <Sidebar />
+                            <Switch>
+                                <Route path="/" exact component={Home} />
+                                <Route path="/home" exact component={Home} />
+                                <Route path="/login" exact component={Login} />
+                                <Route path="/secret" exact component={Secret} />
+                                <ProtectedRoute path="/favorites" exact component={Favorites} />
+                                <Route path="/help" exact component={Help} />
+                                <Route path="/video" exact component={Video} />
+                                <Route path="*" exact component={NotFound} />
+                            </Switch>
+                            <Footer />
+                        </BrowserRouter>
+                    </TopicProvider>
+                </FavoriteProvider>
+            </AuthProvider>
         </ThemeProvider>
     )
 }
