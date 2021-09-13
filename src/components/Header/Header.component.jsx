@@ -1,9 +1,11 @@
 import React, { useState, useContext } from 'react'
 import styled from 'styled-components'
-import { Link } from 'react-router-dom'
+import { Link, useHistory } from 'react-router-dom'
 
 import * as FaIcons from 'react-icons/fa'
 import * as AiIcons from 'react-icons/ai'
+import * as IoIcons from 'react-icons/io5'
+
 import PropTypes from 'prop-types'
 
 import SearchBar from '../SearchBar/SearchBar.component'
@@ -53,12 +55,40 @@ const Image = styled.img`
     width: 32px;
     border-radius: 50%;
 `
+const MenuUser = styled.div`
+    position: absolute;
+    right: 0px;
+`
+const Option = styled.ul`
+    display: flex;
+    align-items: center;
+    background: ${({ themeContext }) =>
+        themeContext ? Colors.LIGHT_SUPERLIGHTPRIMARYCOLOR : Colors.DARK_SUPERLIGHTPRIMARYCOLOR};
+    color: ${({ themeContext }) =>
+        themeContext ? Colors.LIGHT_DARKSECONDARYCOLOR : Colors.DARK_LIGHTSECONDARYCOLOR};
+    width: 200px;
+    height: 40px;
+    padding-left: 16px;
+    padding-right: 16px;
+    border-radius: 2px;
+    p {
+        padding-left: 10px;
+    }
+    &:hover {
+        background: ${({ themeContext }) =>
+            themeContext ? Colors.LIGHT_LIGHTSECONDARYCOLOR : Colors.DARK_LIGHTSECONDARYCOLOR};
+        color: ${Colors.LIGHT_LETTER};
+        cursor: pointer;
+    }
+`
 function Header({ onHamburgerMenuClick }) {
     const [isToggled, setIsToggled] = useState(false)
+    const [menuSign, setMenuSign] = useState(false)
     const pressHandler = () => onHamburgerMenuClick()
+    const history = useHistory()
 
     const [themeContext, themeDispatcher] = useContext(ThemeContext)
-    const [authContext, authDispatcher] = useContext(AuthContext)
+    const [authContext, setAuth] = useContext(AuthContext)
 
     return (
         <Container themeContext={themeContext} role="navigation">
@@ -84,16 +114,44 @@ function Header({ onHamburgerMenuClick }) {
                     }}
                 />
                 {authContext?.id ? (
-                    <Image
-                        src={authContext.avatarUrl}
-                        alt={authContext.name}
-                        onClick={(e) => {
-                            authDispatcher({
-                                type: 'clear',
-                            })
-                            e.preventDefault()
-                        }}
-                    />
+                    <div>
+                        <Image
+                            src={authContext.avatarUrl}
+                            alt={authContext.name}
+                            onClick={(e) => {
+                                setMenuSign(!menuSign)
+                                e.preventDefault()
+                            }}
+                            data-testid="logo-user"
+                        />
+                        {menuSign && (
+                            <MenuUser>
+                                <Option
+                                    onClick={(e) => {
+                                        setAuth()
+                                        setMenuSign(!menuSign)
+                                        e.preventDefault()
+                                    }}
+                                    themeContext={themeContext}
+                                >
+                                    <AiIcons.AiOutlineLogout />
+                                    <p>Log out</p>
+                                </Option>
+                                <Option
+                                    onClick={(e) => {
+                                        history.push('/help')
+                                        setMenuSign(!menuSign)
+                                        e.preventDefault()
+                                    }}
+                                    themeContext={themeContext}
+                                    data-testid="help-user"
+                                >
+                                    <IoIcons.IoHelp />
+                                    <p>Help</p>
+                                </Option>
+                            </MenuUser>
+                        )}
+                    </div>
                 ) : (
                     <Button tittle="SIGN IN" />
                 )}

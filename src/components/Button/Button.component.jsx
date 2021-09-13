@@ -32,16 +32,23 @@ const Icon = styled.div`
     align-items: center;
     color: ${Colors.WHITE};
 `
+const ButtonLink = styled(Link)`
+    text-decoration: none;
+
+    &:hover {
+        cursor: pointer;
+    }
+`
 function Button({ tittle }) {
     return (
-        <Link to="/login">
+        <ButtonLink to="/login">
             <Container>
                 <Icon role="figure">
                     <IoIcons.IoPersonCircle />
                 </Icon>
                 <Text role="contentinfo">{tittle}</Text>
             </Container>
-        </Link>
+        </ButtonLink>
     )
 }
 

@@ -25,16 +25,18 @@ const VideoLink = styled(Link)`
 `
 
 function Favorites() {
-    const [favoriteContext, favoriteDispatcher] = useContext(FavoriteContext)
-    const [themeContext, themeDispatcher] = useContext(ThemeContext)
-    console.log('***', favoriteContext)
+    const [favoriteContext] = useContext(FavoriteContext)
+    const [themeContext] = useContext(ThemeContext)
 
     return (
         <Container themeContext={themeContext}>
             {favoriteContext?.length ? (
                 favoriteContext.map((item) => (
                     <VideoLink
-                        to={{ pathname: `/video`, search: `?videoUrl=${item.id.videoId}` }}
+                        to={{
+                            pathname: `/video`,
+                            search: `?videoUrl=${item.id.videoId || item.id}`,
+                        }}
                         key={item.snippet.publishedAt}
                         role="figure"
                     >

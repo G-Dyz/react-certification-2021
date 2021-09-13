@@ -5,6 +5,8 @@ export default {
     LIGHT_WARNING: 'rgb(255, 192, 203, 0.75)',
     DARK_CARD: 'rgba(0, 0, 0, 0.75)',
     LIGHT_CARD: 'rgba(0, 0, 0, 0.25)',
+    GRAY: '#606060',
+    GRAY_LETTER: '#737373',
 
     //  Light Theme
 

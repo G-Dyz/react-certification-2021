@@ -1,5 +1,7 @@
 import React from 'react'
 import * as AiIcons from 'react-icons/ai'
+import * as IoIcons from 'react-icons/io5'
+import * as RiIcons from 'react-icons/ri'
 
 const SidebarData = [
     {
@@ -17,7 +19,13 @@ const SidebarData = [
     {
         title: 'Login',
         path: '/login',
-        icon: <AiIcons.AiOutlineLogin role="img" />,
+        icon: <RiIcons.RiLoginCircleFill role="img" />,
+        security: false,
+    },
+    {
+        title: 'Help',
+        path: '/help',
+        icon: <IoIcons.IoHelpCircleSharp role="img" />,
         security: false,
     },
 ]

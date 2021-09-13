@@ -1,6 +1,11 @@
-import { render, screen, fireEvent, act } from '@testing-library/react'
+import { render, screen, fireEvent, act, userEvent } from '@testing-library/react'
 import React from 'react'
+import { useHistory } from 'react-router-dom'
 import App from './App'
+import LoginApi from './pages/Login/Login.api'
+
+window.alert = jest.fn()
+jest.mock('./pages/Login/Login.api')
 
 test('should have all of its components', () => {
     render(<App />)
@@ -101,7 +106,6 @@ test('should change style of sidebar as toggleSwitch is light theme/dark theme',
 test('should change style of help page as toggleSwitch is light theme/dark theme', () => {
     render(<App />)
     const toggleSwitch = screen.getByTestId('checkbox')
-    fireEvent.click(screen.getByText('Help'))
 
     const infoBefore = screen.getAllByRole('contentinfo')
 
@@ -133,6 +137,12 @@ test('should change content of video page', () => {
 })
 
 test('should allow login', () => {
+    window.alert.mockClear()
+    LoginApi.mockResolvedValue({
+        id: '123',
+        name: 'Wizeline',
+        avatarUrl: 'https://media.glassdoor.com/sqll/868055/wizeline-squarelogo-1473976610815.png',
+    })
     render(<App />)
     fireEvent.click(screen.getByText('SIGN IN'))
 
@@ -140,7 +150,7 @@ test('should allow login', () => {
         expect(screen.getByRole('form')).toBeInTheDocument()
         expect(screen.getAllByRole('contentinfo').length).toEqual(2)
 
-        const userInput = screen.getByPlaceholderText('email')
+        const userInput = screen.getByPlaceholderText('username')
         fireEvent.change(userInput, { target: { value: 'wizeline' } })
 
         const passswordInput = screen.getByPlaceholderText('password')
@@ -151,5 +161,120 @@ test('should allow login', () => {
 
     setTimeout(() => {
         fireEvent.click(screen.getByText('Favorites'))
+    }, 1500)
+})
+
+test('should not allow login with wrong credentials', () => {
+    window.alert.mockClear()
+    LoginApi.mockResolvedValue(new Error('Username or password invalid'))
+    render(<App />)
+    fireEvent.click(screen.getByText('SIGN IN'))
+
+    const usernameInput = screen.getByPlaceholderText('username')
+    fireEvent.change(usernameInput, { target: { value: 'xwizelinex' } })
+
+    const passwordInput = screen.getByPlaceholderText('password')
+    fireEvent.change(passwordInput, { target: { value: 'xRocks!x' } })
+
+    fireEvent.click(screen.getByTestId('submit-button'))
+})
+
+test('should navegate to favorites page', () => {
+    window.localStorage.removeItem('@User:key')
+    window.localStorage.setItem(
+        '@User:key',
+        JSON.stringify({
+            id: '123',
+            name: 'Wizeline',
+            avatarUrl:
+                'https://media.glassdoor.com/sqll/868055/wizeline-squarelogo-1473976610815.png',
+        })
+    )
+    render(<App />)
+    setTimeout(() => {
+        fireEvent.click(screen.getAllByRole('figure')[2])
+    }, 1500)
+    setTimeout(() => {
+        fireEvent.click(screen.getByText(/Save/i))
+    }, 1500)
+    setTimeout(() => {
+        fireEvent.click(screen.getByTestId('hamburgerMenu'))
+    }, 1500)
+    setTimeout(() => {
+        fireEvent.click(screen.getAllByText(/Favorites/i)[0])
+    }, 1500)
+    setTimeout(() => {
+        expect(screen.getAllByRole('gridcell').length).toBeGreaterThan(0)
+    }, 1500)
+})
+
+test('should save and remove a favorite video', () => {
+    render(<App />)
+    setTimeout(() => {
+        fireEvent.click(screen.getAllByRole('figure')[2])
+    }, 1500)
+    setTimeout(() => {
+        fireEvent.click(screen.getByTestId('add-favorite'))
+    }, 1500)
+
+    setTimeout(() => {
+        fireEvent.click(userEvent.hover(screen.getAllByTestId('add-favorite-card')[0]))
+    }, 1500)
+
+    setTimeout(() => {
+        fireEvent.click(screen.getByTestId('remove-favorite'))
+    }, 1500)
+
+    setTimeout(() => {
+        fireEvent.click(screen.getByTestId('hamburgerMenu'))
+    }, 1500)
+    setTimeout(() => {
+        fireEvent.click(screen.getAllByText(/Favorites/i)[0])
+    }, 1500)
+    setTimeout(() => {
+        expect(screen.getAllByRole('gridcell').length).toBeGreaterThan(0)
+    }, 1500)
+    setTimeout(() => {
+        const favorite = screen.getAllByTestId('remove-favorite-card')
+        fireEvent.click(favorite[0])
+    }, 1500)
+})
+
+test('should save and remove a favorite video', () => {
+    render(<App />)
+
+    setTimeout(() => {
+        fireEvent.click(userEvent.hover(screen.getAllByTestId('add-favorite-card')[0]))
+    }, 1500)
+
+    setTimeout(() => {
+        fireEvent.click(userEvent.hover(screen.getAllByTestId('add-favorite-card')[0]))
+    }, 1500)
+})
+
+test('should ask for help', () => {
+    render(<App />)
+    fireEvent.click(screen.getByTestId('logo-user'))
+
+    fireEvent.click(screen.getByTestId('help-user'))
+})
+
+test('should log out the app', () => {
+    render(<App />)
+    setTimeout(() => {
+        fireEvent.click(screen.getByTestId('hamburgerMenu'))
+    }, 1500)
+    setTimeout(() => {
+        fireEvent.click(screen.getAllByText(/Favorites/i)[0])
+    }, 1500)
+    setTimeout(() => {
+        expect(screen.getAllByRole('gridcell').length).toBeGreaterThan(0)
+    }, 1500)
+
+    fireEvent.click(screen.getByTestId('logo-user'))
+    fireEvent.click(screen.getByText('Log out'))
+
+    setTimeout(() => {
+        expect(screen.getByText('to continue to YouTube')).toBeInTheDocument()
     }, 1500)
 })

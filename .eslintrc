@@ -39,7 +39,11 @@
         "it":true,
         "beforeEach":true,
         "test":true,
-        "window":true
+        "window":true,
+        "alert":true,
+        "jest":true,
+        "waitFor":true,
+        "reject":true
     },
     "overrides": [
         {

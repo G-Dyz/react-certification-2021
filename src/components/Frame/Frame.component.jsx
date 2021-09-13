@@ -1,9 +1,13 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import styled from 'styled-components'
 import * as IconName from 'react-icons/bi'
 import * as AiIcons from 'react-icons/ai'
 import PropTypes from 'prop-types'
 import Device from '../../styles/Device'
+import { ThemeContext } from '../../context/ThemeContext'
+import { FavoriteContext } from '../../context/FavoriteContext'
+import { AuthContext } from '../../context/AuthContext'
+import Colors from '../../styles/Colors'
 
 const Container = styled.div`
     display: flex;
@@ -40,10 +44,15 @@ const CardDetail = styled.div`
     h1 {
         font-size: 1.5em;
         padding-bottom: 8px;
+        color: ${({ themecontext }) => (themecontext ? Colors.DARK_NEUTRO : Colors.LIGHT_NEUTRO)};
     }
     h2 {
         font-size: 1em;
         padding-bottom: 8px;
+        color: ${({ themecontext }) => (themecontext ? Colors.DARK_NEUTRO : Colors.LIGHT_NEUTRO)};
+    }
+    p {
+        color: ${({ themecontext }) => (themecontext ? Colors.DARK_NEUTRO : Colors.LIGHT_NEUTRO)};
     }
 `
 const Info = styled.div`
@@ -52,7 +61,7 @@ const Info = styled.div`
     padding-top: 20px;
     padding-bottom: 8px;
     justify-content: space-between;
-    color: #737373;
+    color: ${Colors.GRAY_LETTER};
 `
 const Icon = styled.div`
     font-size: 1.5rem;
@@ -60,7 +69,8 @@ const Icon = styled.div`
     flex-direction: row;
     align-items: center;
     justify-content: center;
-    color: #737373;
+    color: ${Colors.GRAY_LETTER};
+    cursor: pointer;
 `
 const IconText = styled.div`
     font-size: 1.2rem;
@@ -79,7 +89,11 @@ const Separator = styled.hr`
     margin-bottom: 24px;
 `
 
-function Frame({ video }) {
+function Frame({ video, isFavorite }) {
+    const [themeContext, themeDispatcher] = useContext(ThemeContext)
+    const [favoriteContext, addFavorite, removeFavorite] = useContext(FavoriteContext)
+    const [authContext, setAuth] = useContext(AuthContext)
+
     return (
         <Container>
             {video?.snippet?.localized ? (
@@ -90,7 +104,7 @@ function Frame({ video }) {
                         alt={video.snippet.localized.title}
                         role="figure"
                     />
-                    <CardDetail>
+                    <CardDetail themecontext={themeContext}>
                         <h1>{video.snippet.localized.title}</h1>
                         <Channel>
                             <h2 role="contentinfo">{video.snippet.channelTitle}</h2>
@@ -105,10 +119,30 @@ function Frame({ video }) {
                                     {video.snippet.publishedAt.substring(0, 10)}
                                 </p>
                             </div>
-                            <Icon>
-                                <IconName.BiListPlus />
-                                <IconText>Guardar</IconText>
-                            </Icon>
+                            {authContext?.id &&
+                                (isFavorite ? (
+                                    <Icon
+                                        onClick={(e) => {
+                                            removeFavorite(video)
+                                            e.preventDefault()
+                                        }}
+                                        data-testid="remove-favorite"
+                                    >
+                                        <IconName.BiListMinus />
+                                        <IconText>Remove</IconText>
+                                    </Icon>
+                                ) : (
+                                    <Icon
+                                        onClick={(e) => {
+                                            addFavorite(video)
+                                            e.preventDefault()
+                                        }}
+                                        data-testid="add-favorite"
+                                    >
+                                        <IconName.BiListPlus />
+                                        <IconText>Save</IconText>
+                                    </Icon>
+                                ))}
                         </Info>
                     </CardDetail>
                     <Separator />
@@ -130,11 +164,12 @@ Frame.propTypes = {
             publishedAt: PropTypes.string,
         }),
     }),
+    isFavorite: PropTypes.bool,
 }
 
 Frame.defaultProps = {
     video: PropTypes.shape({
-        id: null,
+        id: '',
         snippet: {
             localized: {
                 title: '',
@@ -144,6 +179,7 @@ Frame.defaultProps = {
             publishedAt: '',
         },
     }),
+    isFavorite: true,
 }
 
 export default Frame

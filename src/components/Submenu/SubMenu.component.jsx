@@ -43,9 +43,10 @@ const DropdownLink = styled(Link)`
     }
 `
 
-function SubMenu({ item }) {
+function SubMenu({ item, onClickCloseSidebar }) {
     const [subnav, setSubnav] = useState(false)
     const showSubNav = () => setSubnav(!subnav)
+    const pressHandler = () => onClickCloseSidebar()
 
     const [themeContext, themeDispatcher] = useContext(ThemeContext)
 
@@ -53,7 +54,7 @@ function SubMenu({ item }) {
         <>
             <SidebarLink
                 to={item.path}
-                onClick={item.subNav && showSubNav}
+                onClick={item.subNav ? showSubNav : pressHandler}
                 themecontext={+themeContext}
                 role="contentinfo"
             >
@@ -93,6 +94,7 @@ SubMenu.propTypes = {
             })
         ),
     }),
+    onClickCloseSidebar: PropTypes.func,
 }
 
 SubMenu.defaultProps = {
@@ -102,6 +104,7 @@ SubMenu.defaultProps = {
         icon: null,
         subNav: null,
     }),
+    onClickCloseSidebar: null,
 }
 
 export default SubMenu
